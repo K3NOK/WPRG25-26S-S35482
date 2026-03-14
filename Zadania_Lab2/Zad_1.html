@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h1>FORM</h1>
+</head>
+<body>
+<form method="post" action="Rejestracja.php" enctype="multipart/form-data">
+    <!-- dane osobowe -->
+    <fieldset>
+        <legend> this is a legend</legend>
+        <ol>
+            <li><label>Imię:</label><input type="text" name="imie" required minlength="2" maxlength="50" placeholder="plejsholder" autofocus></li>
+            <li><label>Nazwisko:</label><input type="text" required maxlength="60"></li>
+            <li><label>Adres e-mail:<input type="email" required multiple></label></li>
+            <li><label>Nr. tel.:<input type="tel" pattern="[0-9]{9}"></label></li>
+            <li><label>Data ur.:<input type="date" min="1900-01-01" max="2026-01-01"></label></li>
+            <li><label>Płeć:<input type="radio" name="Kobieta" name="Mężczyzna" name="Inna"></label></li>
+
+
+        </ol>
+    </fieldset>
+</form>
+</body>
+</html>
