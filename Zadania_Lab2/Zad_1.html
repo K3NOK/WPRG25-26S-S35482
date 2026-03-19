@@ -20,8 +20,41 @@
         <legend>Adres</legend>
         <label>Ulica i numer:<br><input type="text" required></label><br>
         <label>Kod pocztowy:<br><input type="text" pattern="[0-9]{2}-[0-9]{3}" placeholder="00-000"></label><br>
-        <label>Miasto:<br><input></label>
+        <label>Miasto:<br><input list="lista-miast" required/></label><br>
+        <label>Kraj:<br><select id="kraj" name="kraj" required>
+            <optgroup label="Europa">
+                <option selected>Polska</option>
+                <option>Niemcy</option>
+                <option>Francja</option>
+                <option>Włochy</option>
+            </optgroup>
+
+            <optgroup label="Northern Plateau">
+                <option>Norm Company Territory</option>
+                <option>Kino Pass</option>
+                <option>Decke Region</option>
+                <option>Ende</option>
+            </optgroup>
+        </select></label>
+    </fieldset>
+    <fieldset>
+        <legend>Preferencje czytelnicze</legend>
+        
     </fieldset>
 </form>
+
+<datalist id="lista-miast">
+    <option value="Warszawa"></option>
+    <option value="Kraków"></option>
+    <option value="Frieren the demon slayer(city)"></option>
+    <option value="Gdańsk"></option>
+    <option value="Spółka Zło Dundersztyca(city)"></option>
+    <option value="Pepe_Pan_Dziobak(city)"></option>
+    <option value="Ferb(city)"></option>
+    <option value="Fineasz(city)"></option>
+</datalist>
+
+
+
 </body>
 </html>
