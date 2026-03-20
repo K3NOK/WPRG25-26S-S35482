@@ -39,9 +39,62 @@
     </fieldset>
     <fieldset>
         <legend>Preferencje czytelnicze</legend>
-        
+        <p>
+
+            <label> Ulubione gatunki litterackie: </label><br>
+            <input type="checkbox" id="gatunek-poezja"  />
+            <label for="gatunek-poezja">Poezja</label>
+
+            <input type="checkbox" id="gatunek-powiesc"  />
+            <label for="gatunek-powiesc">Powieść</label>
+
+            <input type="checkbox" id="gatunek-kryminal"  />
+            <label for="gatunek-kryminal">Kryminał</label>
+
+            <input type="checkbox" id="gatunek-fantastyka"  />
+            <label for="gatunek-fantastyka">Fantastyka</label>
+
+            <input type="checkbox" id="gatunek-reportaz"  />
+            <label for="gatunek-reportaz">Reportaż</label>
+
+            <input type="checkbox" id="gatunek-biografia"  />
+            <label for="gatunek-biografia">Biografia</label>
+
+            <br><label for="liczba-ksiazek">Liczba wypożyczanych książek miesięcznie:</label><br>
+            <input type="number" id="liczba-ksiazek" min="1" max="20" step="1" value="3"/><br>
+
+            <label for="pora-odwiedzin">Preferowana pora odwiedzin:</label><br>
+            <input type="time" id="pora-odwiedzin"  min="07:00" max="22:00"/>
+
+            <br><label for="aktywnosc">Aktywność czytelnicza (0–10):</label><br />
+            <input type="range" id="aktywnosc" name="aktywnosc" min="0" max="10" step="1" value="5" oninput="wartoscAktywnosci.value = aktywnosc.value"/>
+            <output id="wartoscAktywnosci" for="aktywnosc">5</output>
+
+            <br><label for="kolor-okladki">Ulubiony kolor okładki:</label><br />
+            <input type="color" id="kolor-okladki" name="kolor_okladki" value="#3498db"/>
+
+            <br><label for="profil-url">Link do profilu czytelnika:</label><br />
+            <input type="url" id="profil-url" name="profil_url" placeholder="https://"/>
+
+            <br><label for="zdjecie-legitymacyjne">Wgranie zdjęcia legitymacyjnego:</label><br />
+            <input type="file" id="zdjecie-legitymacyjne" name="zdjecie_legitymacyjne" accept="image/png, image/jpeg"/>
+
+            <br><label for="uwagi">Komentarz / uwagi:</label><br />
+            <textarea id="uwagi" name="uwagi" rows="5" cols="50" maxlength="500" placeholder="Placeholder"></textarea>
+        </p>
     </fieldset>
+    <label for="wypelnienie-profilu">Wypełnienie profilu:</label><br />
+    <meter id="wypelnienie-profilu" value="0.4" min="0" max="1" low="0.3" high="0.7" optimum="0.9">0.4</meter>
+
+    <p><label for="postep-weryfikacji">Postęp weryfikacji konta:</label><br />
+        <progress id="postep-weryfikacji" value="25" max="100">25%</progress></p>
+
+    <p><button type="submit">Zarejestruj się</button>
+        <button type="reset">Wyczyść formularz</button></p>
 </form>
+
+
+
 
 <datalist id="lista-miast">
     <option value="Warszawa"></option>
