@@ -10,6 +10,9 @@
     <link rel="canonical" href="https://example.com/portal.html" />
     <base href="/" />
 
+    <!-- Podłączenie zewnętrznego arkusza stylów portal.css -->
+    <link href="portal.css" rel="stylesheet" type="text/css" />
+
     <noscript>
         Ten portal działa bez JavaScript. Jeśli widzisz ten komunikat, JS jest wyłączony (co jest OK dla tego projektu).
     </noscript>
@@ -23,7 +26,8 @@
     </h1>
 
     <nav aria-label="Menu główne">
-        <ul>
+        <!-- class="nav-lista" pozwala CSS celować dokładnie w tę listę, nie wszystkie ul na stronie -->
+        <ul class="nav-lista">
             <li>
                 <a href="#aktualnosci">Aktualności</a>
                 <ul>
@@ -56,6 +60,9 @@
     <article id="artykul">
         <h2>Derby tygodnia: ALP — analiza kolejki</h2>
 
+        <!-- Akapit wprowadzający .lead — wyróżniony wizualnie spośród zwykłych akapitów -->
+        <p class="lead">Najgorętszy pojedynek tej kolejki przyciągnął tłumy kibiców i zapowiedział emocjonującą walkę o mistrzostwo ligi akademickiej.</p>
+
         <p>
             <time datetime="2026-03-20">20.03.2026</time>
         </p>
@@ -64,7 +71,8 @@
             Autor: <a href="mailto:autor@uczelnia.pl">autor@uczelnia.pl</a>
         </address>
 
-        <p id="aktualnosci">
+        <!-- Usunięto id="aktualnosci" stąd — id przeniesiono do section w aside (wymaganie zadania) -->
+        <p>
             W tej kolejce <mark>zaskoczyła</mark> forma drużyny
             <abbr title="Akademicka Liga Piłkarska">ALP</abbr>. Według
             <cite>raportu sędziowskiego</cite> to spotkanie było
@@ -93,9 +101,19 @@
                 <col bgcolor="#ffffff" />
             </colgroup>
 
+            <!-- Dwa wiersze nagłówka:
+                 Wiersz 1 — grupowe nagłówki kolumn (super-header)
+                 Wiersz 2 — szczegółowe etykiety kolumn (M/P/B/Bilans)
+                 CSS używa selektora thead tr + tr do nadania ciemniejszego
+                 tła drugiemu wierszowi, sygnalizując jego podrzędność -->
             <thead>
             <tr>
-                <th scope="col" colspan="2">Drużyna</th>
+                <th scope="colgroup" colspan="2">Drużyna</th>
+                <th scope="colgroup" colspan="4">Statystyki sezonu</th>
+            </tr>
+            <tr>
+                <th scope="col">Lp.</th>
+                <th scope="col">Nazwa</th>
                 <th scope="col">M</th>
                 <th scope="col">P</th>
                 <th scope="col">B</th>
@@ -163,6 +181,15 @@
             </tr>
             </tfoot>
         </table>
+
+        <!-- Cytat trenera — blockquote z cite wskazującym źródło.
+             Zawiera dwa bezpośrednie elementy <p>:
+             - pierwszy: treść cytatu
+             - drugi: podpis autora (stylizowany osobno przez CSS) -->
+        <blockquote cite="#">
+            <p>To był najlepszy mecz sezonu — walczyliśmy do ostatniej minuty i pokazaliśmy prawdziwy charakter tej drużyny.</p>
+            <p>— trener Marek Wiśniewski, Politechnika FC</p>
+        </blockquote>
 
         <hr />
 
@@ -272,6 +299,18 @@
     <hr />
 
     <aside>
+        <!-- Sekcja aktualności dodana PRZED istniejącą treścią aside.
+             id="aktualnosci" umożliwia nawigację z menu głównego
+             oraz precyzyjne stylowanie przez CSS (#aktualnosci ul, #aktualnosci a). -->
+        <section id="aktualnosci">
+            <h3>Aktualności</h3>
+            <ul>
+                <li><a href="#">Politechnika FC wygrała derby kolejki</a></li>
+                <li><a href="#">Nowy rekord strzelecki Jana Nowaka</a></li>
+                <li><a href="#">Zmiany w terminarzu rozgrywek ALP</a></li>
+            </ul>
+        </section>
+
         <h2 id="slownik">Słownik pojęć i dodatki</h2>
 
         <dl>
