@@ -1,113 +1,230 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="pl">
+
 <head>
-    <h1>Formularz rejestracyjny do Biblioteki Akademickiej.</h1>
+
+    <meta charset="UTF-8">
+
+
+    <title>Biblioteka Akademicka – Rejestracja czytelnika</title>
+
+
+    <link href="formularz.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-<form method="post" action="Rejestracja.php" enctype="multipart/form-data">
-    <fieldset>
-        <legend>Dane osobowe</legend>
-            <label>Imię:</label><br><input type="text" name="imie" required minlength="2" maxlength="50" placeholder="plejsholder" autofocus><br>
-            <label>Nazwisko:</label><br><input type="text" required maxlength="60"><br>
-            <label>Adres e-mail:<br><input type="email" required multiple></label><br>
-            <label>Nr. tel.:<br><input type="tel" pattern="[0-9]{9}"></label><br>
-            <label>Data ur.:<br><input type="date" min="1900-01-01" max="2026-01-01"></label><br>
-            <label>Płeć:<br></label>
-                <label><input type="radio" name="plec">Kobieta <input type="radio" name="plec">Mezczyzna <input type="radio" name="plec">Inna </label><br>
-            <label>Nr. PESEL:<br><input type="password" pattern="[0-9]{11}"></label><br>
-    </fieldset>
-    <fieldset>
-        <legend>Adres</legend>
-        <label>Ulica i numer:<br><input type="text" required></label><br>
-        <label>Kod pocztowy:<br><input type="text" pattern="[0-9]{2}-[0-9]{3}" placeholder="00-000"></label><br>
-        <label>Miasto:<br><input list="lista-miast" required/></label><br>
-        <label>Kraj:<br><select id="kraj" name="kraj" required>
-            <optgroup label="Europa">
-                <option selected>Polska</option>
-                <option>Niemcy</option>
-                <option>Francja</option>
-                <option>Włochy</option>
-            </optgroup>
 
-            <optgroup label="Northern Plateau">
-                <option>Norm Company Territory</option>
-                <option>Kino Pass</option>
-                <option>Decke Region</option>
-                <option>Ende</option>
-            </optgroup>
-        </select></label>
-    </fieldset>
-    <fieldset>
-        <legend>Preferencje czytelnicze</legend>
-        <p>
 
-            <label> Ulubione gatunki litterackie: </label><br>
-            <input type="checkbox" id="gatunek-poezja"  />
-            <label for="gatunek-poezja">Poezja</label>
+    <header>
 
-            <input type="checkbox" id="gatunek-powiesc"  />
-            <label for="gatunek-powiesc">Powieść</label>
+        <h1>Biblioteka Akademicka</h1>
 
-            <input type="checkbox" id="gatunek-kryminal"  />
-            <label for="gatunek-kryminal">Kryminał</label>
 
-            <input type="checkbox" id="gatunek-fantastyka"  />
-            <label for="gatunek-fantastyka">Fantastyka</label>
+        <p>Wiedza dostępna dla każdego – odkrywaj, czytaj, rozwijaj się</p>
+    </header>
 
-            <input type="checkbox" id="gatunek-reportaz"  />
-            <label for="gatunek-reportaz">Reportaż</label>
 
-            <input type="checkbox" id="gatunek-biografia"  />
-            <label for="gatunek-biografia">Biografia</label>
+    <nav>
+        <ol>
+            <li>Strona główna</li>
+            <li>Biblioteka Akademicka</li>
 
-            <br><label for="liczba-ksiazek">Liczba wypożyczanych książek miesięcznie:</label><br>
-            <input type="number" id="liczba-ksiazek" min="1" max="20" step="1" value="3"/><br>
+            <li class="active">Rejestracja czytelnika</li>
+        </ol>
+    </nav>
 
-            <label for="pora-odwiedzin">Preferowana pora odwiedzin:</label><br>
-            <input type="time" id="pora-odwiedzin"  min="07:00" max="22:00" value="12:00"/>
 
-            <br><label for="aktywnosc">Aktywność czytelnicza (0–10):</label><br />
-            <input type="range" id="aktywnosc" name="aktywnosc" min="0" max="10" step="1" value="5" oninput="wartoscAktywnosci.value = aktywnosc.value"/>
-            <output id="wartoscAktywnosci" for="aktywnosc">5</output>
+    <main>
 
-            <br><label for="kolor-okladki">Ulubiony kolor okładki:</label><br />
-            <input type="color" id="kolor-okladki" name="kolor_okladki" value="#3498db"/>
 
-            <br><label for="profil-url">Link do profilu czytelnika:</label><br />
-            <input type="url" id="profil-url" name="profil_url" placeholder="https://"/>
-
-            <br><label for="zdjecie-legitymacyjne">Wgranie zdjęcia legitymacyjnego:</label><br />
-            <input type="file" id="zdjecie-legitymacyjne" name="zdjecie_legitymacyjne" accept="image/png, image/jpeg"/>
-
-            <br><label for="uwagi">Komentarz / uwagi:</label><br />
-            <textarea id="uwagi" name="uwagi" rows="5" cols="50" maxlength="500" placeholder="Placeholder"></textarea>
+        <p class="info">
+            Wypełnij poniższy formularz, aby zarejestrować się jako czytelnik
+            Biblioteki Akademickiej i uzyskać dostęp do naszych zbiorów.
         </p>
-    </fieldset>
-    <label for="wypelnienie-profilu">Wypełnienie profilu:</label><br />
-    <meter id="wypelnienie-profilu" value="0.4" min="0" max="1" low="0.3" high="0.7" optimum="0.9">0.4</meter>
-
-    <p><label for="postep-weryfikacji">Postęp weryfikacji konta:</label><br />
-        <progress id="postep-weryfikacji" value="25" max="100">25%</progress></p>
-
-    <p><button type="submit">Zarejestruj się</button>
-        <button type="reset">Wyczyść formularz</button></p>
-</form>
 
 
+        <form method="post" action="Rejestracja.php" enctype="multipart/form-data">
 
 
-<datalist id="lista-miast">
-    <option value="Warszawa"></option>
-    <option value="Kraków"></option>
-    <option value="Frieren the demon slayer(city)"></option>
-    <option value="Gdańsk"></option>
-    <option value="Spółka Zło Dundersztyca(city)"></option>
-    <option value="Pepe_Pan_Dziobak(city)"></option>
-    <option value="Ferb(city)"></option>
-    <option value="Fineasz(city)"></option>
-</datalist>
+            <fieldset id="dane-osobowe">
+                <legend>Dane osobowe</legend>
 
 
+                <label for="imie">Imię: <span class="required">*</span></label><br>
+
+                <input type="text" id="imie" name="imie" required minlength="2" maxlength="50" placeholder="Wpisz imię"
+                    autofocus><br>
+
+                <label for="nazwisko">Nazwisko: <span class="required">*</span></label><br>
+                <input type="text" id="nazwisko" name="nazwisko" required maxlength="60"
+                    placeholder="Wpisz nazwisko"><br>
+
+
+                <label for="email">Adres e-mail: <span class="required">*</span></label><br>
+                <input type="email" id="email" name="email" required multiple placeholder="adres@email.pl"><br>
+
+
+                <label for="telefon">Nr. tel.:</label><br>
+                <input type="tel" id="telefon" name="tel" pattern="[0-9]{9}" placeholder="123456789"><br>
+
+
+                <label for="data-ur">Data urodzenia:</label><br>
+                <input type="date" id="data-ur" name="data_ur" min="1900-01-01" max="2026-01-01"><br>
+
+
+                <label>Płeć:</label><br>
+                <input type="radio" id="plec-kobieta" name="plec" value="K">
+                <label for="plec-kobieta">Kobieta</label>
+                <input type="radio" id="plec-mezczyzna" name="plec" value="M">
+                <label for="plec-mezczyzna">Mężczyzna</label>
+                <input type="radio" id="plec-inna" name="plec" value="I">
+                <label for="plec-inna">Inna</label><br>
+
+
+                <label for="pesel">Nr PESEL: <span class="required">*</span></label><br>
+                <input type="password" id="pesel" name="pesel" required pattern="[0-9]{11}"
+                    placeholder="Wpisz 11 cyfr"><br>
+
+            </fieldset>
+
+
+            <fieldset id="adres">
+                <legend>Adres</legend>
+
+                <label for="ulica">Ulica i numer: <span class="required">*</span></label><br>
+                <input type="text" id="ulica" name="ulica" required placeholder="ul. Przykładowa 1"><br>
+
+
+                <label for="kod">Kod pocztowy:</label><br>
+                <input type="text" id="kod" name="kod" pattern="[0-9]{2}-[0-9]{3}" placeholder="00-000"><br>
+
+
+                <label for="miasto">Miasto: <span class="required">*</span></label><br>
+                <input id="miasto" name="miasto" list="lista-miast" required placeholder="Wpisz lub wybierz miasto"><br>
+
+
+                <label for="kraj">Kraj: <span class="required">*</span></label><br>
+                <select id="kraj" name="kraj" required>
+                    <optgroup label="Europa">
+                        <option selected>Polska</option>
+                        <option>Niemcy</option>
+                        <option>Francja</option>
+                        <option>Włochy</option>
+                    </optgroup>
+                    <optgroup label="Northern Plateau">
+                        <option>Norm Company Territory</option>
+                        <option>Kino Pass</option>
+                        <option>Decke Region</option>
+                        <option>Ende</option>
+                    </optgroup>
+                </select><br>
+
+            </fieldset>
+
+
+            <fieldset id="preferencje">
+                <legend>Preferencje czytelnicze</legend>
+                <p>
+
+
+                    <label>Ulubione gatunki literackie:</label><br>
+
+                    <input type="checkbox" id="gatunek-poezja" name="gatunki" value="poezja">
+                    <label for="gatunek-poezja">Poezja</label>
+
+                    <input type="checkbox" id="gatunek-powiesc" name="gatunki" value="powiesc">
+                    <label for="gatunek-powiesc">Powieść</label>
+
+                    <input type="checkbox" id="gatunek-kryminal" name="gatunki" value="kryminal">
+                    <label for="gatunek-kryminal">Kryminał</label>
+
+                    <input type="checkbox" id="gatunek-fantastyka" name="gatunki" value="fantastyka">
+                    <label for="gatunek-fantastyka">Fantastyka</label>
+
+                    <input type="checkbox" id="gatunek-reportaz" name="gatunki" value="reportaz">
+                    <label for="gatunek-reportaz">Reportaż</label>
+
+                    <input type="checkbox" id="gatunek-biografia" name="gatunki" value="biografia">
+                    <label for="gatunek-biografia">Biografia</label>
+
+                    <br><br>
+
+
+                    <label for="liczba-ksiazek">Liczba wypożyczanych książek miesięcznie:</label><br>
+                    <input type="number" id="liczba-ksiazek" name="liczba_ksiazek" min="1" max="20" step="1"
+                        value="3"><br>
+
+
+                    <label for="pora-odwiedzin">Preferowana pora odwiedzin:</label><br>
+                    <input type="time" id="pora-odwiedzin" name="pora_odwiedzin" min="07:00" max="22:00"
+                        value="12:00"><br>
+
+
+                    <label for="aktywnosc">Aktywność czytelnicza (0–10):</label><br>
+                    <input type="range" id="aktywnosc" name="aktywnosc" min="0" max="10" step="1" value="5"
+                        oninput="wartoscAktywnosci.value = aktywnosc.value">
+                    <output id="wartoscAktywnosci" for="aktywnosc">5</output><br>
+
+
+                    <label for="kolor-okladki">Ulubiony kolor okładki:</label><br>
+                    <input type="color" id="kolor-okladki" name="kolor_okladki" value="#3498db"><br>
+
+
+                    <label for="profil-url">Link do profilu czytelnika:</label><br>
+                    <input type="url" id="profil-url" name="profil_url" placeholder="https://"><br>
+
+
+                    <label for="zdjecie-legitymacyjne">Wgranie zdjęcia legitymacyjnego:</label><br>
+                    <input type="file" id="zdjecie-legitymacyjne" name="zdjecie_legitymacyjne"
+                        accept="image/png, image/jpeg"><br>
+
+
+                    <label for="uwagi">Komentarz / uwagi:</label><br>
+                    <textarea id="uwagi" name="uwagi" rows="5" cols="50" maxlength="500"
+                        placeholder="Wpisz dodatkowe uwagi..."></textarea>
+
+                </p>
+            </fieldset>
+
+
+            <label for="wypelnienie-profilu">Wypełnienie profilu:</label><br>
+            <meter id="wypelnienie-profilu" value="0.4" min="0" max="1" low="0.3" high="0.7" optimum="0.9">40%</meter>
+
+            <p>
+                <label for="postep-weryfikacji">Postęp weryfikacji konta:</label><br>
+
+                <progress id="postep-weryfikacji" value="25" max="100">25%</progress>
+            </p>
+
+            <p>
+
+                <button type="submit">Zarejestruj się</button>
+                <button type="reset">Wyczyść formularz</button>
+            </p>
+
+        </form>
+
+
+        <datalist id="lista-miast">
+            <option value="Warszawa"></option>
+            <option value="Kraków"></option>
+            <option value="Gdańsk"></option>
+            <option value="Wrocław"></option>
+            <option value="Poznań"></option>
+            <option value="Łódź"></option>
+            <option value="Szczecin"></option>
+            <option value="Lublin"></option>
+        </datalist>
+
+    </main>
+
+
+    <footer>
+        <p>© <time datetime="2026">2026</time> Biblioteka Akademicka. Wszelkie prawa zastrzeżone.</p>
+        <p><a href="mailto:kontakt@biblioteka.edu.pl">kontakt@biblioteka.edu.pl</a></p>
+    </footer>
 
 </body>
+
 </html>
