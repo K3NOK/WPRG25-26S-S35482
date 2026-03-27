@@ -8,9 +8,10 @@
 
     <title>Portal Sportowy — Liga Akademicka</title>
     <link rel="canonical" href="https://example.com/portal.html" />
-    <base href="/" />
 
     <!-- Podłączenie zewnętrznego arkusza stylów portal.css -->
+    <!-- UWAGA: <base href="/"> zostało usunięte, bo powodowało szukanie portal.css
+         pod /portal.css (korzeń dysku) zamiast w tym samym folderze co ten plik. -->
     <link href="portal.css" rel="stylesheet" type="text/css" />
 
     <noscript>
