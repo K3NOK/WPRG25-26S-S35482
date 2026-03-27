@@ -1,0 +1,773 @@
+/* =====================================================================
+   PORTAL.CSS — Arkusz stylów Portalu Sportowego ALP
+   =====================================================================
+
+   WAŻNE ZASADY (zgodnie z wymaganiami zadania):
+   ✔ Tylko zewnętrzny arkusz stylów — podłączony przez <link> w <head>.
+   ✔ Brak atrybutu style="" bezpośrednio w elementach HTML.
+   ✔ Brak znacznika <style> wewnątrz HTML.
+   ✔ Brak pseudoklas   (:hover, :first-child, :nth-child itp.)
+   ✔ Brak pseudoelementów  (::before, ::after itp.)
+   ✔ Brak flexbox   (display: flex, flex-direction itp.)
+   ✔ Brak grid      (display: grid, grid-template itp.)
+
+   SŁOWNIK RODZAJÓW SELEKTORÓW — użytych w tym pliku:
+   ┌──────────────────────┬──────────────────────────────────────────────┐
+   │ Rodzaj selektora     │ Przykład i znaczenie                         │
+   ├──────────────────────┼──────────────────────────────────────────────┤
+   │ Typ elementu         │ h1   — wszystkie <h1> na stronie             │
+   │ Klasa                │ .lead — element z class="lead"               │
+   │ Identyfikator        │ #top  — element z id="top"                   │
+   │ Grupowy (,)          │ h1, h2, h3 — wszystkie trzy naraz            │
+   │ Potomka (spacja)     │ aside h3 — każde <h3> GDZIEKOLWIEK w aside   │
+   │ Dziecka (>)          │ main > article — <article> BEZPOŚREDNIO w    │
+   │                      │   <main>, nie zagnieżdżone głębiej           │
+   │ Sąsiada bezp. (+)    │ h2 + p — <p> TUŻ PO <h2>, bez niczego       │
+   │                      │   między nimi (brat bezpośredni)             │
+   │ Rodzeństwa ogólnego  │ h2 ~ h2 — każde <h2> PO INNYM <h2>          │
+   │ (~)                  │   na tym samym poziomie (brat ogólny)        │
+   │ Sąsiada rodzeństwa   │ article + aside — <aside> tuż po <article>   │
+   │ Atrybutu             │ a[href^="mailto:"] — <a> którego href        │
+   │                      │   ZACZYNA SIĘ od "mailto:"                   │
+   │                      │ img[alt] — <img> POSIADAJĄCE atrybut alt     │
+   └──────────────────────┴──────────────────────────────────────────────┘
+
+   UŻYTE FORMY ZAPISU KOLORÓW (wymaganie zadania):
+   • #rrggbb    np. #1a1a2e  — szesnastkowo (R=1a, G=1a, B=2e)
+   • hsl()      np. hsl(40, 80%, 95%) — odcień, nasycenie, jasność
+   • rgba()     np. rgba(0, 0, 0, 0.8) — RGB + kanał alfa (przezroczystość)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. TYPOGRAFIA OGÓLNA
+   =====================================================================
+   Selektor grupowy "h1, h2, h3":
+     Jeden selektor obejmuje wszystkie trzy poziomy nagłówków naraz.
+     Przecinek (,) oznacza "i/lub" — każdy z wymienionych elementów
+     otrzymuje te same właściwości.
+
+   font-family: podajemy listę czcionek — przeglądarka wybiera pierwszą
+     dostępną. "sans-serif" na końcu to tzw. czcionka generyczna
+     (bezszeryfowa, np. Arial) — zawsze dostępna jako ostateczne wyjście.
+
+   Selektor "p":
+     Wszystkie akapity używają czcionki szeryfowej (Georgia lub podobna).
+     Czcionki szeryfowe mają "ogonki" przy literach, co ułatwia czytanie
+     dłuższych tekstów.
+   ===================================================================== */
+h1,
+h2,
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =====================================================================
+   2. NAGŁÓWEK PORTALU (header)
+   =====================================================================
+   Selektor "header":
+     Celuje w element <header> — kontener z logo i nawigacją.
+
+   background-color: #1a1a2e
+     Ciemny granatowy kolor tła (hex: R=1a=26, G=1a=26, B=2e=46).
+
+   color: — kolor tekstu dziedziczony przez dzieci (domyślny jasny).
+
+   text-align: center — wyśrodkowanie całej zawartości w poziomie.
+
+   padding: — wewnętrzny margines (odległość od krawędzi elementu).
+   ===================================================================== */
+header {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 20px 30px;
+}
+
+/* =====================================================================
+   GŁÓWNY TYTUŁ PORTALU — selektor "#top h1"
+   =====================================================================
+   Selektor potomka "#top h1":
+     #top  → element z id="top" (czyli <header id="top">)
+     h1    → element <h1> GDZIEKOLWIEK wewnątrz tego headera
+     Spacja między nimi oznacza relację "potomka" (nie musi być
+     bezpośrednim dzieckiem — może być zagnieżdżony głębiej).
+
+   font-variant: small-caps
+     Kapitaliki — małe litery są wyświetlane jako małe wersaliki
+     (zmniejszone wielkie litery). Daje monumentalny efekt.
+
+   letter-spacing: 4px
+     Zwiększone odstępy między literami (tracking/kerning).
+     Wartość w px oznacza dodatkową odległość między każdą literą.
+
+   text-shadow: — WIELOWARSTWOWY cień tekstu
+     Składnia jednej warstwy: offset-x offset-y blur-radius kolor
+       offset-x  — przesunięcie cienia w poziomie (+ = prawo)
+       offset-y  — przesunięcie cienia w pionie (+ = dół)
+       blur-radius — rozmycie cienia (0 = ostry, im większy tym mglistszy)
+       kolor     — kolor cienia
+     Wiele warstw oddzielamy przecinkami. Zadanie wymaga CO NAJMNIEJ 3.
+
+     Warstwa 1: rgba(0,0,0,0.8) — ciemny cień bezpośrednio pod tekstem
+     Warstwa 2: rgba(0,100,200,0.5) — niebieska poświata (głębia)
+     Warstwa 3: hsl(220,80%,30%) — ciemnoniebieski daleki cień (głębia 3D)
+
+   font-size: 2.5em
+     em = jednostka względna. 1em = rozmiar czcionki rodzica.
+     2.5em = 2,5× większa niż domyślna czcionka (ok. 40px przy 16px bazowych).
+   ===================================================================== */
+#top h1 {
+    font-variant: small-caps;
+    letter-spacing: 4px;
+    font-size: 2.5em;
+    color: #ffffff;
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        4px 4px 10px rgba(0, 100, 200, 0.5),
+        7px 7px 18px hsl(220, 80%, 30%);
+}
+
+
+/* =====================================================================
+   3. NAWIGACJA — lista .nav-lista
+   =====================================================================
+   Selektor ".nav-lista":
+     Celuje w element <ul class="nav-lista"> — główną listę w <nav>.
+     Kropka (.) przed nazwą oznacza klasę CSS.
+
+   list-style: none
+     Usuwa punktory/liczby z listy. Domyślna lista ma czarne kółka
+     (•) — ustawiamy "none" żeby wyglądała jak menu, nie jak lista.
+
+   padding: 0 / margin: 0
+     Resetujemy wbudowane wcięcia przeglądarki dla list.
+   ===================================================================== */
+.nav-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* =====================================================================
+   Selektor ".nav-lista > li"
+   =====================================================================
+   > (strzałka / selektor dziecka):
+     Celuje wyłącznie w BEZPOŚREDNIE dzieci <li> listy .nav-lista.
+     Bez > selektor ".nav-lista li" dotknąłby TAKŻE zagnieżdżone <ul>
+     wewnątrz li (podmenu) — tego nie chcemy.
+
+   display: inline-block
+     Sprawia, że elementy <li> ustawiają się obok siebie (poziomo),
+     jak słowa w tekście. Bez flexboxa to najprostszy sposób na
+     poziomą nawigację. "inline" = w linii, "block" = można ustawiać
+     padding/margin w pionie.
+
+   font-weight: bold
+     Pogrubiony tekst linków nawigacyjnych.
+
+   letter-spacing: 1px
+     Lekko zwiększone odstępy między literami — poprawia czytelność.
+   ===================================================================== */
+.nav-lista>li {
+    display: inline-block;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    vertical-align: top;
+}
+
+/* =====================================================================
+   Selektor ".nav-lista > li + li" — SĄSIAD BEZPOŚREDNI
+   =====================================================================
+   + (plus / selektor sąsiada bezpośredniego):
+     Celuje w <li>, który stoi BEZPOŚREDNIO po innym <li> na tym samym
+     poziomie. Tylko następny brat — nie każdy <li> po pierwszym,
+     ale każdy kolejny.
+
+     Schemat: li  +  li  +  li  +  li
+                  ^       ^       ^
+              te trzy <li> dostaną styl (nie pierwszy)
+
+   border-left: 2px solid #4a90d9
+     Lewa krawędź oddzielająca kolejne elementy menu.
+     Tworzy wizualny separator | między pozycjami nawigacji.
+   ===================================================================== */
+.nav-lista>li+li {
+    border-left: 2px solid #4a90d9;
+}
+
+/* =====================================================================
+   Selektor ".nav-lista a" — linki w nawigacji
+   =====================================================================
+   Potomek bez > (spacja): celuje we WSZYSTKIE <a> wewnątrz .nav-lista,
+   w tym linki w podmenu (zagnieżdżonych <ul>).
+
+   color: #a8d8ea
+     Jasnoniebieski kolor czytelny na ciemnym tle headera.
+
+   text-decoration: none
+     Usuwa domyślne podkreślenie linków. Linki wyglądają czyściej.
+   ===================================================================== */
+.nav-lista a {
+    color: #a8d8ea;
+    text-decoration: none;
+}
+
+/* =====================================================================
+   Selektor atrybutu ".nav-lista a[href^='https']" — linki ZEWNĘTRZNE
+   =====================================================================
+   Selektor atrybutu z ^ (daszek = "zaczyna się od"):
+     a[href^="https"] — element <a> którego atrybut href ZACZYNA SIĘ
+     od "https". Łapie linki do zewnętrznych domen (innych stron).
+     Linki wewnętrzne (#aktualnosci, #tabela) zaczynają się od #.
+
+   font-style: italic
+     Kursywa — wyróżnienie wizualne linków zewnętrznych.
+
+   color: hsl(45, 100%, 70%)
+     Złotożółty kolor (hsl: odcień 45° = żółty, pełne nasycenie, jasny).
+     hsl() = Hue (odcień 0-360°), Saturation (nasycenie %), Lightness (jasność %)
+   ===================================================================== */
+.nav-lista a[href^="https"] {
+    font-style: italic;
+    color: hsl(45, 100%, 70%);
+}
+
+/* =====================================================================
+   Selektor atrybutu ".nav-lista a[target='_blank']" — nowe okno
+   =====================================================================
+   a[target="_blank"] — element <a> z dokładnym atrybutem target="_blank".
+   Selektor bez ^ — szukamy DOKŁADNEJ wartości atrybutu (nie "zaczyna się").
+
+   Linki otwierające się w NOWYM OKNIE/KARCIE powinny być podkreślone,
+   żeby użytkownik wiedział, że klikając opuści bieżącą kartę.
+
+   text-decoration: underline
+     Dodaje podkreślenie (nadpisuje "none" z .nav-lista a dzięki temu,
+     że ten selektor ma wyższą specyficzność).
+   ===================================================================== */
+.nav-lista a[target="_blank"] {
+    text-decoration: underline;
+}
+
+
+/* =====================================================================
+   4. AKAPIT WPROWADZAJĄCY — klasa .lead
+   =====================================================================
+   Selektor ".lead":
+     Celuje w <p class="lead"> — akapit wprowadzający artykuł.
+     Powinien wyraźnie wyróżniać się spośród zwykłych <p>.
+
+   font-size: 1.2em — 20% większy od zwykłego tekstu (1em = rozmiar bazowy)
+
+   font-style: italic — kursywa wyróżnia lead wizualnie
+
+   line-height: 1.8
+     Interlinia (odstęp między wierszami). 1.8 = 180% rozmiaru czcionki.
+     Zwiększona interlinia poprawia czytelność i daje "oddech" tekstowi.
+
+   word-spacing: 3px
+     Zwiększone odstępy między słowami — kolejne wyróżnienie.
+
+   color: hsl(210, 15%, 45%)
+     Stonowany szaroniebieski kolor. Mniej nasycony niż główny tekst.
+     hsl(210°, 15% nasycenia, 45% jasności) = przyciemniony szary-granat.
+
+   text-indent: 2em
+     Wcięcie akapitowe — pierwsze słowo linii przesunięte o 2× rozmiar czcionki.
+     Tradycyjne formatowanie tekstu w stylu książkowym.
+   ===================================================================== */
+.lead {
+    font-size: 1.2em;
+    font-style: italic;
+    line-height: 1.8;
+    word-spacing: 3px;
+    color: hsl(210, 15%, 45%);
+    text-indent: 2em;
+}
+
+
+/* =====================================================================
+   5. NAGŁÓWKI H2 I ICH NASTĘPNIKI
+   =====================================================================
+   Selektor "h2":
+     Wszystkie nagłówki drugiego poziomu na stronie.
+
+   color: #1a1a2e
+     Ten sam ciemnoniebieski co tło headera → spójność kolorystyczna.
+
+   text-decoration: underline
+     Podkreślenie nagłówków h2 — wizualne wyróżnienie sekcji.
+   ===================================================================== */
+h2 {
+    color: #1a1a2e;
+    text-decoration: underline;
+}
+
+/* =====================================================================
+   Selektor "h2 + p" — PIERWSZY AKAPIT PO H2
+   =====================================================================
+   + (selektor sąsiada bezpośredniego):
+     Celuje w <p> który stoi BEZPOŚREDNIO po <h2> — żaden element
+     nie może być między nimi. Jest to "rodzeński sąsiad".
+
+   Daje subtelnie inne formatowanie niż zwykłe <p> — sygnalizuje,
+   że ten akapit jest bezpośrednim rozwinięciem tytułu sekcji.
+
+   color: hsl(220, 40%, 35%)
+     Ciemnoniebieski, spójny z nagłówkami, ale nieco jaśniejszy.
+
+   word-spacing: 4px — zwiększone odstępy między słowami
+
+   text-indent: 1.5em — wcięcie akapitowe
+   ===================================================================== */
+h2+p {
+    color: hsl(220, 40%, 35%);
+    word-spacing: 4px;
+    text-indent: 1.5em;
+}
+
+/* =====================================================================
+   Selektor "h2 ~ h2" — KOLEJNE NAGŁÓWKI H2 (RODZEŃSTWO OGÓLNE)
+   =====================================================================
+   ~ (tylda / selektor rodzeństwa ogólnego):
+     Celuje w KAŻDY <h2> który ma przed sobą inny <h2> na TYM SAMYM
+     poziomie zagnieżdżenia. Czyli: drugi, trzeci, czwarty h2 w artykule.
+
+     Schemat: h2  ~  h2  ~  h2  ~  h2
+                    ^       ^       ^
+                 te trzy h2 dostaną styl (nie pierwszy)
+
+   Różnica od + :
+     + → tylko bezpośrednio następny brat
+     ~ → każdy kolejny brat (może być oddzielony innymi elementami)
+
+   font-size: 1.3em — nieco mniejszy niż domyślny h2 (zwykle 1.5em)
+
+   text-shadow — własny, subtelny cień kolejnych h2
+     Jedna warstwa, rgba() z małą nieprzezroczystością (0.4 = 40%).
+   ===================================================================== */
+h2~h2 {
+    font-size: 1.3em;
+    text-shadow: 1px 1px 3px rgba(26, 26, 46, 0.4);
+}
+
+
+/* =====================================================================
+   6. CYTAT TRENERA — blockquote
+   =====================================================================
+   Selektor "blockquote":
+     Celuje w element <blockquote> — semantyczny znacznik cytatu.
+
+   background-color: hsl(40, 80%, 95%)
+     Ciepłe kremowo-żółte tło (odcień 40° = ciepły żółty/brzoskwiniowy,
+     80% nasycenie, 95% jasność = bardzo jasny, prawie biały).
+
+   border-left: 5px solid hsl(30, 70%, 50%)
+     Kolorowe lewe obramowanie (pomarańczowe) wyróżniające cytat.
+     hsl(30°, 70%, 50%) = ciepły pomarańczowy.
+
+   padding: — wewnętrzne odstępy od krawędzi elementu
+   font-style: italic — kursywa dla cytatu
+   ===================================================================== */
+blockquote {
+    background-color: hsl(40, 80%, 95%);
+    border-left: 5px solid hsl(30, 70%, 50%);
+    padding: 16px 24px;
+    font-style: italic;
+    margin: 24px 0;
+}
+
+/* =====================================================================
+   Selektor "blockquote > p" — BEZPOŚREDNIE DZIECI <p> w blockquote
+   =====================================================================
+   > (selektor dziecka):
+     Celuje wyłącznie w <p> będące BEZPOŚREDNIMI dziećmi <blockquote>.
+     Dziedziczą kursywę z rodzica (blockquote { font-style: italic }).
+
+   Resetujemy margines dolny pierwszego p (będzie nadpisany przez p + p).
+   ===================================================================== */
+blockquote>p {
+    margin: 0 0 8px 0;
+}
+
+/* =====================================================================
+   Selektor "blockquote > p + p" — PODPIS AUTORA CYTATU
+   =====================================================================
+   Łączy dwa selektory:
+     blockquote > p  →  bezpośrednie <p> w blockquote
+     + p             →  <p> bezpośrednio po poprzednim <p>
+
+   Razem: drugi <p> (podpis) BEZPOŚREDNIO po pierwszym <p> (treści cytatu),
+   oba będące bezpośrednimi dziećmi <blockquote>.
+
+   Podpis autora powinien wyraźnie RÓŻNIĆ SIĘ od treści cytatu:
+   font-size: 0.9em — mniejszy tekst (90% rozmiaru rodzica)
+   text-align: right — wyrównanie do prawej (konwencja podpisów)
+   font-style: normal — wyłączamy kursywę (odziedziczylibyśmy z blockquote)
+   font-weight: bold — pogrubienie
+   ===================================================================== */
+blockquote>p+p {
+    font-size: 0.9em;
+    text-align: right;
+    font-style: normal;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+/* =====================================================================
+   7. TABELA WYNIKÓW
+   =====================================================================
+   Selektor "thead tr":
+     Wszystkie wiersze <tr> wewnątrz <thead> tabeli.
+
+   background-color: #1a1a2e — ciemne tło (ten sam ciemnoniebieski)
+   color: #f0f0f0 — jasny tekst na ciemnym tle
+   font-variant: small-caps — kapitaliki (wyróżnienie nagłówków)
+   letter-spacing: 2px — zwiększone odstępy liter
+   ===================================================================== */
+thead tr {
+    background-color: #1a1a2e;
+    color: #f0f0f0;
+    font-variant: small-caps;
+    letter-spacing: 2px;
+}
+
+/* =====================================================================
+   Selektor "thead tr + tr" — DRUGI WIERSZ NAGŁÓWKA
+   =====================================================================
+   + (sąsiad bezpośredni) wewnątrz thead:
+     Celuje w drugi <tr> — BEZPOŚREDNIO po pierwszym <tr> w <thead>.
+     Pierwszy wiersz to super-nagłówek (Drużyna | Statystyki sezonu),
+     drugi to szczegółowe etykiety kolumn (Lp. | Nazwa | M | P | B | Bilans).
+
+   background-color: #2d2d4e — nieco CIEMNIEJSZY odcień niż #1a1a2e
+     Sygnalizuje, że to podrzędny (uszczegóławiający) wiersz nagłówka.
+   ===================================================================== */
+thead tr+tr {
+    background-color: #2d2d4e;
+}
+
+/* =====================================================================
+   Selektor "tfoot tr" — wiersze stopki tabeli
+   =====================================================================
+   Wiersze stopki tabeli (legenda, podsumowania) — kontrastowe do nagłówka:
+   background-color: #f5f5f5 — jasne tło
+   color: #333333 — ciemny tekst
+   font-style: italic — kursywa odróżniająca stopkę od danych
+   ===================================================================== */
+tfoot tr {
+    background-color: #f5f5f5;
+    color: #333333;
+    font-style: italic;
+}
+
+
+/* =====================================================================
+   8. OBRAZKI I ELEMENTY MEDIALNE
+   =====================================================================
+   Selektor atrybutu "img[alt]":
+     Celuje w KAŻDY element <img> który POSIADA atrybut alt (nawet pusty).
+     [] — selektor atrybutu: element posiadający dany atrybut.
+
+   Subtelne obramowanie — nie powinno dominować, ale wizualnie "otacza" obraz.
+   ===================================================================== */
+img[alt] {
+    border: 1px solid #cccccc;
+}
+
+/* =====================================================================
+   Selektor atrybutu "img[usemap]" — OBRAZEK Z MAPĄ ODSYŁACZY
+   =====================================================================
+   img[usemap] — <img> posiadający atrybut usemap (mapa klikalna).
+   Powinien mieć WYRÓŻNIONE obramowanie INNEGO KOLORU niż zwykłe obrazki.
+
+   Ten selektor ma wyższą specyficzność niż img[alt] (oba mają 0-1-1
+   ale przeglądarka bierze ten, który jest niżej w arkuszu — cascade),
+   więc nadpisuje border z img[alt].
+
+   border: 3px solid hsl(200, 70%, 50%)
+     Grubsze (3px), niebieskozielone obramowanie.
+     hsl(200°, 70%, 50%) = nasycony niebieskocjan.
+   ===================================================================== */
+img[usemap] {
+    border: 3px solid hsl(200, 70%, 50%);
+}
+
+/* =====================================================================
+   Selektor "figcaption" — PODPISY POD ELEMENTAMI FIGURE
+   =====================================================================
+   figcaption — podpis pod <figure> (obraz, wideo, audio).
+
+   font-size: 0.85em — mniejszy niż otaczający tekst
+   font-style: italic — kursywa
+   text-align: center — wyśrodkowanie
+   opacity: 0.75 — lekka przezroczystość (75% = 25% przeźroczysty)
+     opacity działa na cały element (tekst + tło).
+     1.0 = pełna nieprzezroczystość, 0.0 = całkowita przezroczystość.
+   ===================================================================== */
+figcaption {
+    font-size: 0.85em;
+    font-style: italic;
+    text-align: center;
+    opacity: 0.75;
+}
+
+
+/* =====================================================================
+   9. ROZWIJANE STATYSTYKI — details i summary
+   =====================================================================
+   Selektor "details > summary" — BEZPOŚREDNIE DZIECKO
+   =====================================================================
+   > (selektor dziecka):
+     <summary> musi być BEZPOŚREDNIM dzieckiem <details>.
+     Jest to nagłówek każdego rozkładalnego panelu statystyk.
+
+   Powinien wizualnie ZACHĘCAĆ do kliknięcia:
+   font-weight: bold — pogrubienie
+   color: hsl(200, 80%, 35%) — ciemny niebieskocjan
+   background-color: hsl(200, 30%, 92%) — bardzo jasne tło w tym samym odcieniu
+   padding: — wygodniejszy obszar kliknięcia
+   cursor: pointer — zmienia kursor na rączkę (↑ nie jest pseudoklasą)
+   ===================================================================== */
+details>summary {
+    font-weight: bold;
+    color: hsl(200, 80%, 35%);
+    background-color: hsl(200, 30%, 92%);
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+/* =====================================================================
+   Selektor "details > dl" — TREŚĆ STATYSTYK
+   =====================================================================
+   <dl> (definition list) wewnątrz <details> — bezpośrednie dziecko.
+   Treść powinna być stonowana, nieagresywna wizualnie.
+
+   color: hsl(0, 0%, 40%) — szary (hsl(0°, 0% nasycenie) = odcień szary)
+   word-spacing: 3px — zwiększone odstępy między słowami
+   padding: — wcięcie od krawędzi panelu
+   ===================================================================== */
+details>dl {
+    color: hsl(0, 0%, 40%);
+    word-spacing: 3px;
+    padding: 10px 16px;
+}
+
+
+/* =====================================================================
+   10. SIDEBAR (aside) I JEGO SEKCJE
+   =====================================================================
+   Selektor rodzeństwa "article + aside" — ASIDE TUŻ PO ARTICLE
+   =====================================================================
+   + (selektor sąsiada bezpośredniego):
+     Celuje w <aside> który stoi BEZPOŚREDNIO po <article> na tym samym
+     poziomie zagnieżdżenia (obaj są dziećmi <main>).
+
+     Jest to selektor RODZEŃSTWA — uwzględnia relację między article a aside.
+     Nie: "aside wewnątrz article" (potomek), ale "aside tuż obok article".
+
+   background-color: hsl(220, 20%, 96%)
+     Subtelnie inne tło niż artykuł (który ma białe tło #ffffff).
+     hsl(220°, 20%, 96%) = bardzo jasny, lekko niebieskoszary.
+   ===================================================================== */
+article+aside {
+    background-color: hsl(220, 20%, 96%);
+    padding: 16px;
+}
+
+/* =====================================================================
+   Selektor "aside > section" — BEZPOŚREDNIE SEKCJE W SIDEBARZE
+   =====================================================================
+   > (selektor dziecka):
+     Celuje w <section> będące BEZPOŚREDNIMI dziećmi <aside>.
+     Każda sekcja otrzymuje wyróżnioną lewą ramkę.
+
+   border-left: 4px solid hsl(200, 60%, 50%)
+     Gruba, kolorowa lewa linia — wizualnie oddziela sekcję.
+   padding-left: — wcięcie tekstu od ramki
+   ===================================================================== */
+aside>section {
+    border-left: 4px solid hsl(200, 60%, 50%);
+    padding-left: 12px;
+    margin-bottom: 16px;
+}
+
+/* =====================================================================
+   Selektor "aside > section + section" — KOLEJNE SEKCJE W ASIDE
+   =====================================================================
+   Łączy:
+     aside > section  →  bezpośrednie <section> w <aside>
+     + section        →  każda <section> BEZPOŚREDNIO po poprzedniej
+
+   Każda sekcja PO PIERWSZEJ ma ramkę INNEGO koloru.
+   Pozwala to wizualnie odróżnić sekcje i nadaje dynamiki układowi.
+
+   border-left-color: hsl(30, 70%, 50%)
+     Zmienia tylko KOLOR ramki (nie grubość ani styl).
+     Ciepły pomarańczowy — inny niż niebieskocjan pierwszej sekcji.
+   ===================================================================== */
+aside>section+section {
+    border-left-color: hsl(30, 70%, 50%);
+}
+
+/* =====================================================================
+   Selektor grupowy "aside h2, aside h3" — NAGŁÓWKI W SIDEBARZE
+   =====================================================================
+   Potomek (spacja): h2 i h3 gdziekolwiek wewnątrz <aside>.
+   Selektor grupowy (,): oba poziomy naraz — jedna reguła dla dwóch.
+
+   color: #1a1a2e — spójny ciemny kolor (ten sam co tło headera)
+   font-variant: small-caps — kapitaliki, eleganckie i wyróżnione
+   ===================================================================== */
+aside h2,
+aside h3 {
+    color: #1a1a2e;
+    font-variant: small-caps;
+}
+
+/* =====================================================================
+   Selektor "#aktualnosci ul" — LISTA AKTUALNOŚCI
+   =====================================================================
+   Potomek: <ul> wewnątrz elementu z id="aktualnosci".
+   # — identyfikator (id) — powinien być unikalny na stronie.
+
+   list-style-type: square
+     Zmienia typ punktora na KWADRAT (■) zamiast domyślnego koła (•).
+     Inne wartości: disc (•), circle (○), none (brak).
+   ===================================================================== */
+#aktualnosci ul {
+    list-style-type: square;
+}
+
+/* =====================================================================
+   Selektor "#aktualnosci a" — LINKI W AKTUALOŚCIACH
+   =====================================================================
+   Potomek: wszystkie <a> wewnątrz #aktualnosci.
+
+   font-weight: bold — pogrubione linki
+   text-decoration: none — bez podkreślenia
+   color: #1a1a2e — ciemny kolor, spójny z resztą portalu
+   ===================================================================== */
+#aktualnosci a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #1a1a2e;
+}
+
+/* =====================================================================
+   Selektor "aside ol ul" — ZAGNIEŻDŻONE LISTY UL WEWNĄTRZ OL
+   =====================================================================
+   Potomek: <ul> wewnątrz <ol> wewnątrz <aside>.
+   Zagnieżdżone listy nienumerowane w liście numerowanej.
+
+   list-style-type: circle
+     Punktor "koło" (○) — wewnętrzny, odróżniający się od
+     zewnętrznych kwadratów/numerów.
+   ===================================================================== */
+aside ol ul {
+    list-style-type: circle;
+}
+
+
+/* =====================================================================
+   11. ARTYKUŁ I KASKADA — selektor dziecka "main > article"
+   =====================================================================
+   > (selektor dziecka):
+     Celuje w <article> będący BEZPOŚREDNIM dzieckiem <main>.
+     Nie: każdy article na stronie, ale tylko ten "w main" (podrzędny).
+
+     Jest to dokładnie wymagany SELEKTOR PODRZĘDNY (>).
+     Gdybyśmy napisali "main article" (bez >), trafiłoby też w article
+     zagnieżdżony głębiej (np. w sekcji wewnątrz main).
+
+   background-color: #ffffff — czyste białe tło artykułu
+     Kontrastuje z lekko szarym tłem aside (article + aside).
+   padding: — wewnętrzny margines, tekst nie przylega do krawędzi
+   ===================================================================== */
+main>article {
+    background-color: #ffffff;
+    padding: 20px 24px;
+}
+
+
+/* =====================================================================
+   12. STOPKA — footer
+   =====================================================================
+   Selektor "footer":
+     Celuje w element <footer> — stopka strony.
+
+   background-color: #1a1a2e — ta sama ciemność co header (spójność)
+   color: hsl(0, 0%, 88%) — jasny szary (hsl bez nasycenia = szary)
+   text-align: center — wyśrodkowanie zawartości
+   ===================================================================== */
+footer {
+    background-color: #1a1a2e;
+    color: hsl(0, 0%, 88%);
+    text-align: center;
+    padding: 20px 30px;
+}
+
+/* =====================================================================
+   Selektor atrybutu "footer a[href^='mailto:']" — LINKI E-MAIL
+   =====================================================================
+   ^= — "zaczyna się od": celuje w <a> z href zaczynającym się od "mailto:"
+   Kontekst "footer" zawęża selektor do linków tylko w stopce.
+
+   Trzy typy linków w stopce MUSZĄ być wyraźnie różne:
+   1. E-mail → zielonkawy kolor + pogrubiony
+   2. Telefon → złoty kolor + kursywa (patrz niżej)
+   3. Powrót → biały + podkreślenie (patrz niżej)
+   ===================================================================== */
+footer a[href^="mailto:"] {
+    color: hsl(160, 60%, 65%);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* =====================================================================
+   Selektor atrybutu "footer a[href^='tel:']" — LINKI TELEFONICZNE
+   =====================================================================
+   ^= — "zaczyna się od": celuje w <a> z href zaczynającym się od "tel:"
+   ===================================================================== */
+footer a[href^="tel:"] {
+    color: hsl(45, 90%, 65%);
+    font-style: italic;
+    text-decoration: none;
+}
+
+/* =====================================================================
+   Selektor atrybutu "footer a[href='#top']" — POWRÓT NA GÓRĘ
+   =====================================================================
+   = (bez ^) — DOKŁADNA wartość atrybutu: href jest RÓWNE "#top".
+   Celuje tylko w ten jeden konkretny link (powrót na początek strony).
+   ===================================================================== */
+footer a[href="#top"] {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* =====================================================================
+   Selektor "footer small" — TEKST Z PRAWAMI AUTORSKIMI
+   =====================================================================
+   Potomek: element <small> wewnątrz <footer>.
+   <small> — element semantyczny dla drobnego druku (prawa autorskie itp.)
+
+   opacity: 0.65
+     Subtelna przezroczystość — 65% widoczności (35% przeźroczyste).
+     Tekst jest widoczny, ale nieco stonowany względem głównej treści stopki.
+   display: block — wyświetlenie jako blok (by margin/padding działały)
+   margin-top: 8px — małe odstępy od otaczającego tekstu
+   ===================================================================== */
+footer small {
+    opacity: 0.65;
+    display: block;
+    margin-top: 8px;
+}

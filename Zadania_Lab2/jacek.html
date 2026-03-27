@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!--
+    Deklaracja DOCTYPE – informuje przeglądarkę, że dokument jest napisany
+    w HTML5 (najnowszy standard HTML). Musi być pierwszą linią pliku.
+
+    lang="pl" – atrybut języka dokumentu; pomaga wyszukiwarkom i czytnikom
+    ekranu w poprawnym przetwarzaniu polskich treści.
+-->
+<html lang="pl">
+<head>
+    <!--
+        <meta charset="UTF-8">
+        Deklaracja zestawu znaków. UTF-8 obsługuje polskie znaki (ą, ę, ó, ś itd.)
+        oraz znaki ze wszystkich języków świata. ZAWSZE umieszczaj ją jako pierwszą
+        w sekcji <head>.
+    -->
+    <meta charset="UTF-8">
+
+    <!--
+        <title> – tytuł strony widoczny w zakładce przeglądarki i w wynikach
+        wyszukiwarek. Powinien być zwięzły i opisowy.
+    -->
+    <title>Biblioteka Akademicka – Rejestracja czytelnika</title>
+
+    <!--
+        <link> – łączy dokument HTML z zewnętrznym zasobem.
+        Atrybuty:
+          href="formularz.css"   – ścieżka do pliku CSS (tu: ten sam folder co HTML)
+          rel="stylesheet"       – informuje przeglądarkę, że to arkusz stylów
+          type="text/css"        – typ MIME pliku (opcjonalny w HTML5, ale podajemy
+                                   zgodnie z wymaganiami zadania)
+
+        WAŻNE: Cały wygląd strony pochodzi WYŁĄCZNIE z tego zewnętrznego pliku.
+        Nie używamy atrybutu style="" ani znacznika <style> – są to metody
+        wbudowane (inline/embedded), zakazane przez wytyczne zadania.
+    -->
+    <link href="formularz.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <!--
+        ================================================================
+        ELEMENT <header> – Nagłówek strony
+        ================================================================
+        <header> to semantyczny element HTML5 oznaczający nagłówek
+        dokumentu lub sekcji. Umieszczamy go PRZED <nav> i <main>.
+
+        Zawiera:
+          <h1>  – nagłówek pierwszego poziomu z nazwą biblioteki
+                  (powinien być jeden na stronie)
+          <p>   – krótkie motto biblioteki
+    -->
+    <header>
+        <!--
+            <h1> – najważniejszy nagłówek na stronie.
+            CSS w formularz.css nadaje mu: wielkie litery, biały kolor,
+            rozmiar 2rem, cień tekstu złożony z dwóch warstw.
+        -->
+        <h1>Biblioteka Akademicka</h1>
+
+        <!--
+            <p> – krótkie motto.
+            CSS nadaje mu kursywę i jaśniejszy kolor (#c8d8e8),
+            odróżniając je wizualnie od tytułu.
+        -->
+        <p>Wiedza dostępna dla każdego – odkrywaj, czytaj, rozwijaj się</p>
+    </header>
+
+    <!--
+        ================================================================
+        ELEMENT <nav> – Nawigacja / Ścieżka powrotu (breadcrumb)
+        ================================================================
+        <nav> to semantyczny element HTML5 dla obszarów nawigacyjnych.
+        Umieszczamy go MIĘDZY <header> a <main>.
+
+        Wewnątrz <nav> używamy listy numerowanej <ol> (ordered list):
+          <ol>  – lista uporządkowana (z numerami)
+          <li>  – element listy (list item)
+
+        Ścieżka powrotu (breadcrumb) pokazuje hierarchię strony:
+          Strona główna → Biblioteka Akademicka → Rejestracja czytelnika
+
+        CSS w formularz.css sprawia, że lista wygląda jak poziomy pasek
+        nawigacyjny (nie jak standardowa ponumerowana lista).
+        Używamy selektora sąsiada "li + li" do stylowania elementów
+        od drugiego wzwyż.
+
+        Klasa "active" na ostatnim <li> oznacza bieżącą stronę –
+        CSS nadaje jej pogrubienie i ciemniejszy kolor.
+    -->
+    <nav>
+        <ol>
+            <li>Strona główna</li>
+            <li>Biblioteka Akademicka</li>
+            <!-- Ostatni element – aktywna strona – wyróżniony przez CSS -->
+            <li class="active">Rejestracja czytelnika</li>
+        </ol>
+    </nav>
+
+    <!--
+        ================================================================
+        ELEMENT <main> – Główna treść strony
+        ================================================================
+        <main> to semantyczny element HTML5 oznaczający główną treść
+        dokumentu. Powinien być JEDEN na stronie. Owija całą zawartość
+        merytoryczną – opis i formularz.
+    -->
+    <main>
+
+        <!--
+            <p class="info"> – krótki opis celu formularza.
+            Klasa "info" w CSS nadaje temu paragrafowi styl dyskretny:
+            kursywa, szary kolor (#555555), wyśrodkowanie.
+            Umieszczamy go WEWNĄTRZ <main>, PRZED formularzem.
+        -->
+        <p class="info">
+            Wypełnij poniższy formularz, aby zarejestrować się jako czytelnik
+            Biblioteki Akademickiej i uzyskać dostęp do naszych zbiorów.
+        </p>
+
+        <!--
+            ================================================================
+            FORMULARZ – element <form>
+            ================================================================
+            Atrybuty formularza:
+              method="post"              – dane przesyłane metodą HTTP POST;
+                                           w odróżnieniu od GET, dane nie są
+                                           widoczne w pasku adresu
+              action="Rejestracja.php"  – adres skryptu na serwerze, który
+                                           odbiera i przetwarza dane formularza
+              enctype="multipart/form-data" – format kodowania danych; wymagany
+                                              gdy formularz przesyła pliki
+                                              (input type="file")
+        -->
+        <form method="post" action="Rejestracja.php" enctype="multipart/form-data">
+
+            <!--
+                ============================================================
+                FIELDSET 1: Dane osobowe
+                ============================================================
+                <fieldset> – grupuje powiązane pola formularza wizualnie
+                i semantycznie (ramka wokół grupy pól).
+
+                id="dane-osobowe" – unikalny identyfikator sekcji.
+                Używany w CSS jako selektor #dane-osobowe do nadania
+                niebieskiego tła (#e8f4fd), innego niż ogólny fieldset.
+
+                <legend> – etykieta/tytuł grupy pól, wyświetlana
+                w obramowaniu fieldset.
+            -->
+            <fieldset id="dane-osobowe">
+                <legend>Dane osobowe</legend>
+
+                <!--
+                    <label> – etykieta pola formularza.
+                    Powiązanie etykiety z polem odbywa się przez:
+                      a) atrybut for="id-pola" + id na polu (pola poniżej)
+                      b) owinięcie pola etykietą (tu nie stosujemy – mniej czytelne)
+
+                    <span class="required">*</span>
+                    Gwiazdka (*) oznaczająca pole obowiązkowe.
+                    Klasa "required" w CSS nadaje jej: color: red, font-weight: bold.
+                    To wizualna informacja dla użytkownika – walidację zapewnia
+                    atrybut "required" na samym polu <input>.
+                -->
+                <label for="imie">Imię: <span class="required">*</span></label><br>
+                <!--
+                    Atrybuty pola tekstowego:
+                      type="text"     – standardowe pole tekstowe
+                      name="imie"     – nazwa pola przesyłana do serwera
+                      required        – pole obowiązkowe; formularz nie wyśle się
+                                        bez jego wypełnienia
+                      minlength="2"   – minimalna liczba znaków
+                      maxlength="50"  – maksymalna liczba znaków
+                      placeholder     – tekst podpowiedzi (znika po kliknięciu)
+                      autofocus       – kursor ustawia się tu automatycznie
+                                        po załadowaniu strony
+                -->
+                <input type="text" id="imie" name="imie" required minlength="2" maxlength="50"
+                       placeholder="Wpisz imię" autofocus><br>
+
+                <label for="nazwisko">Nazwisko: <span class="required">*</span></label><br>
+                <input type="text" id="nazwisko" name="nazwisko" required maxlength="60"
+                       placeholder="Wpisz nazwisko"><br>
+
+                <!--
+                    type="email" – przeglądarka waliduje format adresu e-mail
+                    (musi zawierać "@" i domenę).
+                    multiple – pozwala wpisać kilka adresów oddzielonych przecinkami.
+                -->
+                <label for="email">Adres e-mail: <span class="required">*</span></label><br>
+                <input type="email" id="email" name="email" required multiple
+                       placeholder="adres@email.pl"><br>
+
+                <!--
+                    type="tel" – pole na numer telefonu.
+                    Przeglądarka nie waliduje formatu – robi to atrybut pattern.
+                    pattern="[0-9]{9}" – wyrażenie regularne: dokładnie 9 cyfr (0–9).
+                -->
+                <label for="telefon">Nr. tel.:</label><br>
+                <input type="tel" id="telefon" name="tel" pattern="[0-9]{9}"
+                       placeholder="123456789"><br>
+
+                <!--
+                    type="date" – pole daty z wbudowanym kalendarzem przeglądarki.
+                    min / max – zakres dopuszczalnych dat (format: YYYY-MM-DD).
+                -->
+                <label for="data-ur">Data urodzenia:</label><br>
+                <input type="date" id="data-ur" name="data_ur"
+                       min="1900-01-01" max="2026-01-01"><br>
+
+                <!--
+                    Przyciski RADIO – wybór jednej opcji z grupy.
+                    type="radio"     – przycisk wyboru
+                    name="plec"      – wspólna nazwa grupuje przyciski; wybrać można
+                                       tylko jeden z grupy o tej samej nazwie
+                    id + for         – paruje przycisk z etykietą (kliknięcie etykiety
+                                       zaznacza przycisk)
+
+                    UWAGA CSS: Etykiety następujące bezpośrednio po przyciskach radio
+                    stylizowane są selektorem "input[type="radio"] + label" –
+                    inaczej niż zwykłe etykiety formularza.
+                -->
+                <label>Płeć:</label><br>
+                <input type="radio" id="plec-kobieta" name="plec" value="K">
+                <label for="plec-kobieta">Kobieta</label>
+                <input type="radio" id="plec-mezczyzna" name="plec" value="M">
+                <label for="plec-mezczyzna">Mężczyzna</label>
+                <input type="radio" id="plec-inna" name="plec" value="I">
+                <label for="plec-inna">Inna</label><br>
+
+                <!--
+                    PESEL – numer identyfikacyjny obywatela.
+                    type="password"  – maskuje wpisywane cyfry (wyświetla kropki/gwiazdki),
+                                       co chroni prywatność podczas wpisywania
+                    id="pesel"       – unikalny identyfikator; pozwala CSS nadać temu
+                                       polu specjalny styl (font monospace, letter-spacing)
+                    pattern="[0-9]{11}" – PESEL musi mieć dokładnie 11 cyfr
+
+                    CSS dla input[type="password"] nadaje:
+                      font-family: "Courier New", monospace  – każdy znak tej samej szerokości
+                      letter-spacing: 0.15em                 – wyraźne odstępy między cyframi
+                -->
+                <label for="pesel">Nr PESEL: <span class="required">*</span></label><br>
+                <input type="password" id="pesel" name="pesel" required
+                       pattern="[0-9]{11}" placeholder="Wpisz 11 cyfr"><br>
+
+            </fieldset>
+
+            <!--
+                ============================================================
+                FIELDSET 2: Adres
+                ============================================================
+                id="adres" – unikalny identyfikator; CSS nadaje tej sekcji
+                własne tło (ciepłe, kremowe – hsl) i inny styl legendy
+                (kursywa, brązowy kolor).
+            -->
+            <fieldset id="adres">
+                <legend>Adres</legend>
+
+                <label for="ulica">Ulica i numer: <span class="required">*</span></label><br>
+                <input type="text" id="ulica" name="ulica" required
+                       placeholder="ul. Przykładowa 1"><br>
+
+                <!--
+                    pattern="[0-9]{2}-[0-9]{3}" – format kodu pocztowego: XX-XXX,
+                    np. 00-000. Wyrażenie regularne sprawdza: 2 cyfry, myślnik, 3 cyfry.
+                -->
+                <label for="kod">Kod pocztowy:</label><br>
+                <input type="text" id="kod" name="kod"
+                       pattern="[0-9]{2}-[0-9]{3}" placeholder="00-000"><br>
+
+                <!--
+                    list="lista-miast" – łączy pole z elementem <datalist> o podanym id.
+                    Tworzy pole z autocomplete: podczas wpisywania przeglądarka pokazuje
+                    pasujące podpowiedzi z listy <datalist>.
+                -->
+                <label for="miasto">Miasto: <span class="required">*</span></label><br>
+                <input id="miasto" name="miasto" list="lista-miast" required
+                       placeholder="Wpisz lub wybierz miasto"><br>
+
+                <!--
+                    <select> – lista rozwijana (dropdown).
+                    <optgroup label="..."> – grupuje opcje pod nagłówkiem;
+                                             nagłówek grupy nie jest do wyboru.
+                    <option selected> – ta opcja jest domyślnie zaznaczona.
+                -->
+                <label for="kraj">Kraj: <span class="required">*</span></label><br>
+                <select id="kraj" name="kraj" required>
+                    <optgroup label="Europa">
+                        <option selected>Polska</option>
+                        <option>Niemcy</option>
+                        <option>Francja</option>
+                        <option>Włochy</option>
+                    </optgroup>
+                    <optgroup label="Northern Plateau">
+                        <option>Norm Company Territory</option>
+                        <option>Kino Pass</option>
+                        <option>Decke Region</option>
+                        <option>Ende</option>
+                    </optgroup>
+                </select><br>
+
+            </fieldset>
+
+            <!--
+                ============================================================
+                FIELDSET 3: Preferencje czytelnicze
+                ============================================================
+                id="preferencje" – unikalny identyfikator.
+                CSS (#preferencje) nadaje: tło #e8f8e8 (zielonkawe).
+                CSS (#preferencje legend) nadaje legendzie: kursywę,
+                kapitaliki (font-variant: small-caps) i wyróżniony kolor –
+                te reguły są bardziej szczegółowe niż ogólna reguła "legend {}"
+                i ją nadpisują (kaskada CSS).
+            -->
+            <fieldset id="preferencje">
+                <legend>Preferencje czytelnicze</legend>
+                <p>
+
+                    <!--
+                        Pola CHECKBOX – wybór wielu opcji jednocześnie.
+                        type="checkbox"  – pole wyboru; każde działa niezależnie
+                        id + for         – paruje checkbox z etykietą
+
+                        UWAGA CSS: Etykiety po checkboxach stylizowane są selektorem
+                        "input[type="checkbox"] + label" – selektor sąsiada (+)
+                        wybiera etykietę bezpośrednio następującą po checkboxie.
+                        Daje im inny wygląd niż zwykłym etykietom formularza.
+                    -->
+                    <label>Ulubione gatunki literackie:</label><br>
+
+                    <input type="checkbox" id="gatunek-poezja" name="gatunki" value="poezja">
+                    <label for="gatunek-poezja">Poezja</label>
+
+                    <input type="checkbox" id="gatunek-powiesc" name="gatunki" value="powiesc">
+                    <label for="gatunek-powiesc">Powieść</label>
+
+                    <input type="checkbox" id="gatunek-kryminal" name="gatunki" value="kryminal">
+                    <label for="gatunek-kryminal">Kryminał</label>
+
+                    <input type="checkbox" id="gatunek-fantastyka" name="gatunki" value="fantastyka">
+                    <label for="gatunek-fantastyka">Fantastyka</label>
+
+                    <input type="checkbox" id="gatunek-reportaz" name="gatunki" value="reportaz">
+                    <label for="gatunek-reportaz">Reportaż</label>
+
+                    <input type="checkbox" id="gatunek-biografia" name="gatunki" value="biografia">
+                    <label for="gatunek-biografia">Biografia</label>
+
+                    <br><br>
+
+                    <!--
+                        type="number" – pole liczbowe z przyciskami +/–.
+                        min / max  – minimalny i maksymalny dozwolony wpis.
+                        step       – krok zmiany wartości (tu: 1).
+                        value      – domyślna wartość pola.
+                    -->
+                    <label for="liczba-ksiazek">Liczba wypożyczanych książek miesięcznie:</label><br>
+                    <input type="number" id="liczba-ksiazek" name="liczba_ksiazek"
+                           min="1" max="20" step="1" value="3"><br>
+
+                    <!--
+                        type="time" – pole godziny z wbudowanym timerem.
+                        min / max  – zakres dozwolonych godzin.
+                        value      – domyślna godzina (format HH:MM).
+                    -->
+                    <label for="pora-odwiedzin">Preferowana pora odwiedzin:</label><br>
+                    <input type="time" id="pora-odwiedzin" name="pora_odwiedzin"
+                           min="07:00" max="22:00" value="12:00"><br>
+
+                    <!--
+                        type="range" – suwak (slider) do wyboru wartości z zakresu.
+                        oninput="..." – obsługuje zdarzenie JavaScript; po każdym
+                                        przesunięciu suwaka aktualizuje wartość
+                                        elementu <output>.
+                        <output> – semantyczny element wyświetlający wynik;
+                                   atrybut for łączy go z polem, którego wartość pokazuje.
+                    -->
+                    <label for="aktywnosc">Aktywność czytelnicza (0–10):</label><br>
+                    <input type="range" id="aktywnosc" name="aktywnosc"
+                           min="0" max="10" step="1" value="5"
+                           oninput="wartoscAktywnosci.value = aktywnosc.value">
+                    <output id="wartoscAktywnosci" for="aktywnosc">5</output><br>
+
+                    <!--
+                        type="color" – picker do wyboru koloru.
+                        value – domyślny kolor w formacie szesnastkowym (#RRGGBB).
+                    -->
+                    <label for="kolor-okladki">Ulubiony kolor okładki:</label><br>
+                    <input type="color" id="kolor-okladki" name="kolor_okladki"
+                           value="#3498db"><br>
+
+                    <!--
+                        type="url" – pole na adres URL.
+                        Przeglądarka sprawdza, czy wpis zaczyna się od http:// lub https://.
+                    -->
+                    <label for="profil-url">Link do profilu czytelnika:</label><br>
+                    <input type="url" id="profil-url" name="profil_url"
+                           placeholder="https://"><br>
+
+                    <!--
+                        type="file" – pole przesyłania pliku (file upload).
+                        accept – ogranicza typy plików widocznych w oknie dialogowym
+                                 systemu operacyjnego (tu: tylko PNG i JPEG).
+                    -->
+                    <label for="zdjecie-legitymacyjne">Wgranie zdjęcia legitymacyjnego:</label><br>
+                    <input type="file" id="zdjecie-legitymacyjne" name="zdjecie_legitymacyjne"
+                           accept="image/png, image/jpeg"><br>
+
+                    <!--
+                        <textarea> – wieloliniowe pole tekstowe.
+                        rows="5"        – domyślna wysokość (5 wierszy)
+                        cols="50"       – domyślna szerokość (50 znaków)
+                        maxlength="500" – maksymalna liczba znaków
+                    -->
+                    <label for="uwagi">Komentarz / uwagi:</label><br>
+                    <textarea id="uwagi" name="uwagi" rows="5" cols="50"
+                              maxlength="500" placeholder="Wpisz dodatkowe uwagi..."></textarea>
+
+                </p>
+            </fieldset>
+
+            <!--
+                <meter> – reprezentuje wartość skalarną w określonym zakresie,
+                np. procent wypełnienia profilu.
+                Atrybuty:
+                  value="0.4"   – aktualna wartość (40%)
+                  min / max     – zakres wartości
+                  low="0.3"     – poniżej tej wartości: kolor "niski" (żółty)
+                  high="0.7"    – powyżej tej wartości: kolor "wysoki" (żółty)
+                  optimum="0.9" – wartość optymalna (zielony gdy blisko)
+            -->
+            <label for="wypelnienie-profilu">Wypełnienie profilu:</label><br>
+            <meter id="wypelnienie-profilu" value="0.4" min="0" max="1"
+                   low="0.3" high="0.7" optimum="0.9">40%</meter>
+
+            <p>
+                <label for="postep-weryfikacji">Postęp weryfikacji konta:</label><br>
+                <!--
+                    <progress> – pasek postępu (loading bar).
+                    value – aktualna wartość (25 z 100 = 25%).
+                    max   – wartość maksymalna.
+                    Tekst "25%" wewnątrz to zawartość zastępcza dla przeglądarek
+                    nieobsługujących elementu <progress>.
+                -->
+                <progress id="postep-weryfikacji" value="25" max="100">25%</progress>
+            </p>
+
+            <p>
+                <!--
+                    Przyciski formularza.
+                    CSS używa selektorów ATRYBUTU (nie nazwy elementu), aby różnie
+                    stylować każdy typ przycisku:
+
+                    button[type="submit"] – przycisk wysyłający formularz;
+                      CSS nadaje mu: ciemne tło (#1a3a5c), biały tekst, wielkie litery,
+                      letter-spacing, pogrubienie – wygląd spójny z nagłówkiem.
+
+                    button[type="reset"] – przycisk resetowania (czyści wszystkie pola);
+                      CSS nadaje mu: szare, neutralne tło (#888888), biały tekst –
+                      mniej wyróżniony, żeby użytkownik nie kliknął go przypadkiem.
+                -->
+                <button type="submit">Zarejestruj się</button>
+                <button type="reset">Wyczyść formularz</button>
+            </p>
+
+        </form>
+
+        <!--
+            <datalist> – lista podpowiedzi dla pola <input list="lista-miast">.
+            Nie jest widoczna na stronie – służy wyłącznie jako źródło danych
+            dla autocomplete. Przeglądarka pokazuje pasujące opcje podczas wpisywania.
+            Atrybut id musi być taki sam jak wartość atrybutu list w <input>.
+        -->
+        <datalist id="lista-miast">
+            <option value="Warszawa"></option>
+            <option value="Kraków"></option>
+            <option value="Gdańsk"></option>
+            <option value="Wrocław"></option>
+            <option value="Poznań"></option>
+            <option value="Łódź"></option>
+            <option value="Szczecin"></option>
+            <option value="Lublin"></option>
+        </datalist>
+
+    </main>
+
+    <!--
+        ================================================================
+        ELEMENT <footer> – Stopka strony
+        ================================================================
+        <footer> to semantyczny element HTML5 umieszczany PO <main>.
+        Stanowi wizualne zamknięcie strony – CSS nadaje mu ciemne tło
+        spójne z nagłówkiem (#1a3a5c), biały tekst i wyśrodkowanie.
+
+        Zawiera:
+          <time datetime="2026"> – semantyczny znacznik czasu;
+            atrybut datetime zawiera maszynowo-czytelną wersję (dla robotów
+            i wyszukiwarek), a tekst między znacznikami to wersja dla ludzi.
+
+          <a href="mailto:..."> – hiperłącze otwierające klienta pocztowego
+            z wypełnionym adresem odbiorcy. Umożliwia szybki kontakt.
+            CSS nadaje mu kolor jasnoniebieski (#c8d8e8) – widoczny na ciemnym
+            tle, ale subtelniejszy niż biały tytuł.
+    -->
+    <footer>
+        <p>© <time datetime="2026">2026</time> Biblioteka Akademicka. Wszelkie prawa zastrzeżone.</p>
+        <p><a href="mailto:kontakt@biblioteka.edu.pl">kontakt@biblioteka.edu.pl</a></p>
+    </footer>
+
+</body>
+</html>

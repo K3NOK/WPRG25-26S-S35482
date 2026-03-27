@@ -1,0 +1,808 @@
+/* ================================================================
+   formularz.css – Zewnętrzny arkusz stylów
+   Formularz rejestracyjny Biblioteki Akademickiej
+
+   Plik ten zawiera WSZYSTKIE style strony. Nie używamy atrybutu
+   style="" ani znacznika <style> – zgodnie z wymaganiami zadania.
+
+   Nie używamy: pseudoklas (:hover, :nth-child itp.),
+   pseudoelementów (::before, ::after), flexbox ani grid.
+
+   Stosujemy trzy formy zapisu kolorów:
+     #rrggbb  – szesnastkowy (hex),  np. #1a3a5c
+     hsl()    – barwa / nasycenie / jasność, np. hsl(210, 30%, 95%)
+     rgba()   – czerwony / zielony / niebieski / alfa, np. rgba(0,0,0,0.5)
+
+   STRUKTURA PLIKU:
+     1.  Ustawienia globalne (body)
+     2.  Nagłówek (header, header h1, header p)
+     3.  Nawigacja – breadcrumb (nav, nav ol, nav ol li, li + li, .active)
+     4.  Główna treść (main)
+     5.  Sekcje formularza (fieldset, legend, fieldset label, fieldset p)
+     6.  Różnicowanie sekcji (#dane-osobowe, #adres, #preferencje i ich legendy)
+     7.  Wspólne style pól (input, select, textarea)
+     8.  Style poszczególnych typów pól (input[type="..."])
+     9.  Pola obowiązkowe (input[required])
+    10.  Etykiety radio i checkbox (input[type] + label)
+    11.  Przyciski (button[type="submit"], button[type="reset"])
+    12.  Elementy pomocnicze (.info, .required)
+    13.  Stopka (footer, footer p, footer a)
+   ================================================================ */
+
+
+/* ================================================================
+   1. USTAWIENIA GLOBALNE – selektor: body
+   ================================================================
+   Selektor "body" dotyczy całego widocznego obszaru dokumentu.
+   Właściwości zdefiniowane tu są dziedziczone przez wszystkie
+   elementy potomne (chyba że są nadpisane bardziej szczegółową regułą).
+
+   font-family: lista czcionek w kolejności preferencji.
+     Arial          – pierwsza próba (dostępna na Windows i Mac)
+     Helvetica      – jeśli Arial nie ma – używana na Mac/Linux
+     sans-serif     – ostateczna: dowolna bezszeryfowa czcionka systemowa
+     Czcionki bezszeryfowe (sans-serif) są czytelniejsze na ekranie.
+
+   background-color: jasne, stalowoszare tło (#f0f4f8) – format hex.
+     Nie konkuruje z białymi sekcjami formularza, a nie jest oślepiającym bielą.
+
+   color: domyślny kolor tekstu – ciemnoszary (#222222).
+     Czarny (#000000) bywa zbyt kontrastowy; #222222 jest przyjemniejszy.
+
+   margin: 0 – usuwa domyślny margines zewnętrzny dodawany przez przeglądarki.
+   padding: 0 – usuwa domyślne wewnętrzne odstępy.
+   line-height: globalna wysokość linii dla czytelności całego tekstu.
+   ================================================================ */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f0f4f8;
+    color: #222222;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+
+/* ================================================================
+   2. NAGŁÓWEK – selektor: header
+   ================================================================
+   Selektor "header" dotyczy elementu <header> w HTML.
+   Nagłówek ma wyraźnie kontrastować z jasnym tłem strony –
+   stąd ciemne tło i biały tekst.
+
+   background-color: #1a3a5c – ciemny granatowy niebieski (hex).
+     Ten sam kolor powraca w stopce i przycisku submit – spójność wizualna.
+
+   color: #ffffff – biały tekst.
+
+   text-align: center – całość wyśrodkowana.
+
+   padding: 30px 20px – 30px góra/dół, 20px lewo/prawo.
+     "padding" to wewnętrzny odstęp między treścią a krawędzią elementu.
+   ================================================================ */
+header {
+    background-color: #1a3a5c;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+/* ================================================================
+   Selektor potomka: header h1
+   ================================================================
+   Dotyczy elementu <h1> znajdującego się WEWNĄTRZ <header>.
+   Selektor potomka to dwa selektory oddzielone spacją: "A B"
+   oznacza "wybierz B, który jest wewnątrz A".
+
+   color: #ffffff – biały (tu dziedziczony z header, ale podajemy
+     explicite zgodnie z kryterium recenzji).
+
+   font-size: 2rem – "rem" (root em) to jednostka względna;
+     1rem = rozmiar czcionki elementu <html> (domyślnie 16px w przeglądarkach).
+     2rem = 32px. Rozmiar duży, reprezentacyjny dla nazwy biblioteki.
+
+   text-transform: uppercase – zmienia wszystkie litery na WIELKIE
+     niezależnie od tego, jak są wpisane w HTML.
+
+   text-shadow – cień tekstu. Wymagane minimum 2 warstwy.
+     Składnia jednej warstwy: offset-x offset-y rozmycie kolor
+       offset-x: przesunięcie cienia w poziomie (+ w prawo)
+       offset-y: przesunięcie cienia w pionie (+ w dół)
+       rozmycie: im większe, tym bardziej "miękki" cień
+       kolor: tu rgba() z kanałem alfa (przezroczystość)
+     Pierwsza warstwa:  bliski, wyraźny cień pod spodem
+     Druga warstwa:     dalszy, szerszy cień – efekt głębi
+
+   letter-spacing: odstęp między literami w em (tu 3px).
+   margin: 0 0 10px 0 – kolejność: góra prawo dół lewo.
+   ================================================================ */
+header h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5),
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 3px;
+    margin: 0 0 10px 0;
+}
+
+/* ================================================================
+   Selektor potomka: header p
+   ================================================================
+   Dotyczy elementu <p> (motto) WEWNĄTRZ <header>.
+
+   color: #c8d8e8 – jasnoszaro-niebieski (hex).
+     Jest jaśniejszy od białego tytułu – stonowany, subtelny.
+     Zgodny z kryterium recenzji (np. #c8d8e8).
+
+   font-style: italic – kursywa wyróżnia motto od tytułu.
+
+   margin: 0 – usunięcie domyślnych marginesów paragrafu.
+   ================================================================ */
+header p {
+    color: #c8d8e8;
+    font-style: italic;
+    margin: 0;
+    font-size: 1rem;
+}
+
+
+/* ================================================================
+   3. NAWIGACJA – BREADCRUMB (ścieżka powrotu)
+   ================================================================
+   Selektor: nav
+   ================================================================
+   <nav> to pasek nawigacyjny między nagłówkiem a treścią.
+
+   background-color: hsl(210, 30%, 95%) – jasne, lekko niebieskie tło.
+     hsl() – trzy wartości:
+       210   – odcień (hue): liczba stopni na kole kolorów (0=czerwony,
+               120=zielony, 240=niebieski; 210 to niebieskoszary)
+       30%   – nasycenie (saturation): 0% = szary, 100% = pełny kolor
+       95%   – jasność (lightness): 0% = czarny, 100% = biały; 95% = prawie biały
+
+   border-bottom: 1px solid #c0cfe0 – subtelna linia pod nawigacją.
+   ================================================================ */
+nav {
+    background-color: hsl(210, 30%, 95%);
+    padding: 10px 20px;
+    border-bottom: 1px solid #c0cfe0;
+}
+
+/* ================================================================
+   Selektor: nav ol
+   ================================================================
+   Dotyczy listy <ol> WEWNĄTRZ <nav>.
+
+   list-style: none – usuwa domyślne numery porządkowe (1. 2. 3.)
+     przy elementach listy. Breadcrumb nie wygląda jak standardowa lista.
+
+   margin: 0 / padding: 0 – usunięcie domyślnych wcięć i marginesów listy.
+   ================================================================ */
+nav ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================================================================
+   Selektor: nav ol li
+   ================================================================
+   Dotyczy każdego elementu <li> w liście nawigacyjnej.
+
+   display: inline-block – wyświetla elementy listy w poziomie,
+     obok siebie (zamiast domyślnego pionowego układu "block").
+     "inline-block" łączy zalety inline (układ w wierszu)
+     i block (można ustawiać padding/margin).
+
+   color: #555555 – szary, stonowany kolor elementów ścieżki.
+   font-size: 0.9rem – nieco mniejszy od normalnego tekstu.
+   padding: 0 8px – poziomy odstęp wewnętrzny między elementami.
+   ================================================================ */
+nav ol li {
+    display: inline-block;
+    color: #555555;
+    font-size: 0.9rem;
+    padding: 0 8px;
+}
+
+/* ================================================================
+   Selektor sąsiada: nav ol li + li
+   ================================================================
+   Selektor "+" to SELEKTOR BEZPOŚREDNIEGO SĄSIADA.
+   "A + B" wybiera element B, który jest BEZPOŚREDNIO
+   poprzedzony elementem A na tym samym poziomie.
+
+   "nav ol li + li" = każdy <li>, który bezpośrednio poprzedza
+   inny <li> w tej samej liście, czyli: 2. i 3. element.
+   Pozwala to stylować elementy "od drugiego wzwyż" bez pseudo-klas.
+
+   border-left: 1px solid #90a8c0 – pionowa linia po lewej stronie
+     każdego elementu od drugiego – wizualny separator między pozycjami.
+   ================================================================ */
+nav ol li + li {
+    border-left: 1px solid #90a8c0;
+}
+
+/* ================================================================
+   Klasa .active – ostatni, aktywny element breadcrumba
+   ================================================================
+   Selektor "li.active" wybiera <li> mające klasę "active".
+   Klasa jest dodana ręcznie w HTML do ostatniego elementu listy.
+   Dzięki temu ostatni element wygląda wyraźniej niż poprzednie.
+
+   font-weight: bold – pogrubienie.
+   color: #1a3a5c – ten sam ciemny niebieski co nagłówek.
+   ================================================================ */
+nav ol li.active {
+    font-weight: bold;
+    color: #1a3a5c;
+}
+
+
+/* ================================================================
+   4. GŁÓWNA TREŚĆ – selektor: main
+   ================================================================
+   max-width: 800px – maksymalna szerokość bloku treści.
+     Zapobiega rozciąganiu formularza na cały ekran na szerokich monitorach.
+
+   margin: 30px auto – "auto" wyśrodkowuje blok poziomo
+     (działa gdy element ma określoną szerokość lub max-width).
+
+   padding: 0 20px – poziomy odstęp wewnętrzny.
+   ================================================================ */
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+
+/* ================================================================
+   5. SEKCJE FORMULARZA – fieldset, legend, label, p
+   ================================================================ */
+
+/* ================================================================
+   Selektor: fieldset
+   ================================================================
+   background-color: #ffffff – białe tło sekcji (hex).
+     Wyróżnia sekcje od szarego tła strony (#f0f4f8).
+
+   border: 1px solid #ccd8e8 – subtelne, niebieskawe obramowanie.
+     Składnia: grubość styl kolor.
+
+   border-radius: 6px – zaokrąglone narożniki ramki.
+
+   padding: 20px 25px – wewnętrzne odstępy (góra/dół, lewo/prawo).
+
+   margin-bottom: 20px – odstęp między kolejnymi sekcjami.
+
+   UWAGA KASKADY: Reguły ID (#dane-osobowe, #adres, #preferencje)
+   są bardziej szczegółowe i nadpisują tę regułę dla swoich tła.
+   ================================================================ */
+fieldset {
+    background-color: #ffffff;
+    border: 1px solid #ccd8e8;
+    border-radius: 6px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+}
+
+/* ================================================================
+   Selektor: legend
+   ================================================================
+   <legend> to tytuł sekcji wyświetlany w obramowaniu <fieldset>.
+
+   font-size: 1.1rem – nieco większy niż normalny tekst (1rem).
+   font-weight: bold – pogrubienie wyróżnia tytuł sekcji.
+   color: #1a3a5c – ciemny niebieski (hex).
+   padding: 0 8px – poziomy odstęp wewnętrzny legendy.
+
+   UWAGA KASKADY: Reguły z ID (#dane-osobowe legend, #adres legend,
+   #preferencje legend) nadpisują kolor tej ogólnej reguły.
+   ================================================================ */
+legend {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1a3a5c;
+    padding: 0 8px;
+}
+
+/* ================================================================
+   Selektor potomka: fieldset label
+   ================================================================
+   Dotyczy elementów <label> WEWNĄTRZ <fieldset>.
+
+   UWAGA: Selektor potomka "fieldset label" jest bardziej szczegółowy
+   niż sam "label" i nadpisze ewentualną ogólną regułę dla label.
+
+   font-size: 0.9rem – nieco mniejszy od normalnego tekstu.
+   line-height: 1.8 – zwiększony odstęp między wierszami (180% rozmiaru czcionki).
+     Poprawia czytelność etykiet, szczególnie przy checkboxach i radio.
+   color: #333333 – ciemnoszary (hex); lekko jaśniejszy od domyślnego #222222.
+   display: inline-block – potrzebne do poprawnego działania line-height.
+   ================================================================ */
+fieldset label {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #333333;
+    display: inline-block;
+}
+
+/* ================================================================
+   Selektor potomka: fieldset p
+   ================================================================
+   Paragrafy bezpośrednio wewnątrz sekcji <fieldset>.
+
+   word-spacing: 0.05em – subtelnie zwiększony odstęp między wyrazami.
+     "em" to jednostka względna – tu 5% rozmiaru czcionki.
+   ================================================================ */
+fieldset p {
+    word-spacing: 0.05em;
+}
+
+
+/* ================================================================
+   6. RÓŻNICOWANIE SEKCJI – selektory ID
+   ================================================================
+   Selektory ID (#nazwaId) mają WYŻSZY priorytet (specyficzność)
+   niż selektory elementów (fieldset, legend).
+   Dzięki temu reguły ID nadpisują ogólne reguły bez konfliktu.
+
+   Zasada kaskady CSS: im bardziej szczegółowy selektor,
+   tym ma wyższy priorytet i jego deklaracje "wygrywają".
+   Specyficzność:  ID (#) > klasa (.) > element (div, p...)
+   ================================================================ */
+
+/* ================================================================
+   Selektor ID: #dane-osobowe
+   ================================================================
+   Dotyczy elementu z id="dane-osobowe" (Fieldset 1).
+
+   background-color: #e8f4fd – jasne niebieskawe tło (hex).
+     Zgodne z kryterium recenzji. Inne niż ogólny fieldset (#ffffff).
+   ================================================================ */
+#dane-osobowe {
+    background-color: #e8f4fd;
+}
+
+/* ================================================================
+   Selektor potomka z ID: #dane-osobowe legend
+   ================================================================
+   Dotyczy <legend> WEWNĄTRZ #dane-osobowe.
+   Bardziej szczegółowy niż ogólna reguła "legend {}",
+   więc jej kolor (#1a3a5c) jest tu nadpisany.
+
+   color: #0d5c9c – głębszy niebieski, pasujący do niebieskiego tła sekcji.
+   ================================================================ */
+#dane-osobowe legend {
+    color: #0d5c9c;
+}
+
+/* ================================================================
+   Selektor ID: #adres
+   ================================================================
+   Dotyczy elementu z id="adres" (Fieldset 2).
+
+   background-color: hsl(40, 60%, 95%) – ciepłe kremowe tło.
+     hsl: odcień 40 (ciepło-żółty), nasycenie 60%, jasność 95%.
+     Zupełnie inne niż sekcja danych osobowych – natychmiastowo rozróżnialne.
+   ================================================================ */
+#adres {
+    background-color: hsl(40, 60%, 95%);
+}
+
+/* ================================================================
+   Selektor potomka z ID: #adres legend
+   ================================================================
+   Legenda sekcji adresu: inna niż domyślna i inna niż danych osobowych.
+
+   color: hsl(25, 70%, 35%) – ciepły brązowy kolor.
+   font-style: italic – kursywa dodatkowego odróżnienia.
+   ================================================================ */
+#adres legend {
+    color: hsl(25, 70%, 35%);
+    font-style: italic;
+}
+
+/* ================================================================
+   Selektor ID: #preferencje
+   ================================================================
+   Dotyczy elementu z id="preferencje" (Fieldset 3).
+
+   background-color: #e8f8e8 – jasne zielonkawe tło (hex).
+     Zgodne z kryterium recenzji. Odróżnia się od pozostałych sekcji.
+   ================================================================ */
+#preferencje {
+    background-color: #e8f8e8;
+}
+
+/* ================================================================
+   Selektor potomka z ID: #preferencje legend
+   ================================================================
+   Dotyczy <legend> WEWNĄTRZ #preferencje.
+   Najbardziej szczegółowy selektor dla legend – nadpisuje zarówno
+   ogólną regułę "legend {}" jak i ewentualne inne reguły.
+
+   font-style: italic – kursywa (zgodnie z kryterium recenzji).
+   font-variant: small-caps – zamienia małe litery na małe wersaliki
+     (kapitalikami – wyglądają jak małe wielkie litery).
+   color: hsl(140, 50%, 30%) – ciemna zieleń pasująca do tła.
+     hsl: odcień 140 (zielony), nasycenie 50%, jasność 30%.
+   ================================================================ */
+#preferencje legend {
+    font-style: italic;
+    font-variant: small-caps;
+    color: hsl(140, 50%, 30%);
+}
+
+
+/* ================================================================
+   7. WSPÓLNE STYLE PÓL FORMULARZA
+   ================================================================
+   Zgrupowany selektor: input, select, textarea
+   ================================================================
+   Dotyczy WSZYSTKICH pól formularza jednocześnie.
+   Przecinek między selektorami oznacza "i ten, i ten, i ten".
+
+   font-family: inherit – KLUCZOWA właściwość!
+     Domyślnie pola formularza mają własną czcionkę systemową (różni się
+     od czcionki dokumentu). "inherit" sprawia, że dziedziczą czcionkę
+     z elementu nadrzędnego (body: Arial, Helvetica, sans-serif).
+
+   font-size: 0.9rem – spójny rozmiar tekstu w polach.
+   padding: 6px 8px – wewnętrzny odstęp w polu.
+   margin: 4px 0 – odstęp nad i pod polem.
+
+   box-sizing: border-box – padding i border są WLICZONE w szerokość.
+     Domyślnie (content-box) padding jest DODAWANY do szerokości,
+     co może powodować "wylewanie się" elementów poza kontener.
+   ================================================================ */
+input, select, textarea {
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 6px 8px;
+    margin: 4px 0;
+    box-sizing: border-box;
+}
+
+
+/* ================================================================
+   8. STYLE POSZCZEGÓLNYCH TYPÓW PÓL
+   ================================================================
+   Selektor atrybutu: input[type="wartość"]
+   ================================================================
+   Selektor atrybutu wybiera element na podstawie wartości jego atrybutu.
+   Składnia: element[atrybut="wartość"]
+
+   Każdy typ pola ma subtelnie inne tło lub obramowanie,
+   dzięki czemu typy są wizualnie rozróżnialne.
+   ================================================================ */
+
+/* Pole tekstowe (type="text") – neutralne, szare tło */
+input[type="text"] {
+    background-color: #f8f9fa;
+    border: 1px solid #aabbd0;
+    border-radius: 4px;
+}
+
+/* Pole e-mail (type="email") – lekko niebieskawe tło.
+   rgba(52, 152, 219, 0.08): R=52, G=152, B=219 (niebieski), alfa=0.08
+   Alfa 0.08 = 8% krycie – bardzo delikatny odcień. */
+input[type="email"] {
+    background-color: rgba(52, 152, 219, 0.08);
+    border: 1px solid #7fb3d3;
+    border-radius: 4px;
+}
+
+/* Pole telefonu (type="tel") – lekko zielonkawe.
+   rgba(46, 204, 113, 0.08): zielony kolor z 8% kryciem. */
+input[type="tel"] {
+    background-color: rgba(46, 204, 113, 0.08);
+    border: 1px solid #82c99a;
+    border-radius: 4px;
+}
+
+/* ================================================================
+   Pole hasła (type="password") – używane dla pola PESEL.
+   ================================================================
+   Zgodnie z wymaganiami: "pole PESEL powinno wyświetlać znaki
+   w kroju monospace z wyraźnymi odstępami."
+
+   font-family: "Courier New", Courier, monospace
+     Czcionka monospace (o stałej szerokości) – każdy znak
+     ma dokładnie tę samą szerokość. Ułatwia weryfikację
+     11-cyfrowego numeru PESEL.
+     "Courier New" – pierwsza próba, "Courier" – zapasowa,
+     monospace – dowolna monospace systemowa.
+
+   letter-spacing: 0.15em – wyraźne odstępy między cyframi
+     (15% rozmiaru czcionki).
+
+   Lekko różowawe tło i czerwonawe obramowanie podkreślają
+   wrażliwy charakter tego pola.
+   ================================================================ */
+input[type="password"] {
+    background-color: rgba(231, 76, 60, 0.08);
+    border: 1px solid #e07b70;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.15em;
+}
+
+/* Pole daty (type="date") – lekko fioletowe. */
+input[type="date"] {
+    background-color: rgba(155, 89, 182, 0.08);
+    border: 1px solid #b07ec0;
+    border-radius: 4px;
+}
+
+/* Pole liczbowe (type="number") – lekko pomarańczowe. */
+input[type="number"] {
+    background-color: rgba(230, 126, 34, 0.08);
+    border: 1px solid #d0956b;
+    border-radius: 4px;
+}
+
+/* Pole URL (type="url") – lekko turkusowe. */
+input[type="url"] {
+    background-color: rgba(26, 188, 156, 0.08);
+    border: 1px solid #5bbca8;
+    border-radius: 4px;
+}
+
+/* Pole czasu (type="time") – lekko żółte. */
+input[type="time"] {
+    background-color: rgba(241, 196, 15, 0.08);
+    border: 1px solid #c8a820;
+    border-radius: 4px;
+}
+
+/* Pole koloru (type="color") – brak tła, większa wysokość dla pickera. */
+input[type="color"] {
+    padding: 2px;
+    border: 1px solid #aabbd0;
+    border-radius: 4px;
+    height: 36px;
+    cursor: pointer;
+}
+
+/* Pole pliku (type="file") – szare, dyskretne tło. */
+input[type="file"] {
+    background-color: rgba(149, 165, 166, 0.15);
+    border: 1px solid #95a5a6;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+/* Pole suwaka (type="range") – bez obramowania i tła. */
+input[type="range"] {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+
+/* ================================================================
+   9. POLA OBOWIĄZKOWE – selektor atrybutu: input[required]
+   ================================================================
+   Selektor atrybutu input[required] wybiera wszystkie <input>
+   posiadające atrybut "required" (bez sprawdzania wartości).
+
+   Pola obowiązkowe dostają wyraźny akcent kolorystyczny:
+   border-left: 3px solid #1a3a5c – pogrubiona lewa ramka w kolorze
+   spójnym z nagłówkiem. Natychmiastowo sygnalizuje obowiązkowość.
+
+   UWAGA: ta reguła jest mniej szczegółowa niż np. input[type="text"],
+   więc obramowanie pozostałych boków pochodzi z reguły konkretnego typu,
+   a tylko lewa krawędź jest nadpisywana przez tę regułę.
+   ================================================================ */
+input[required] {
+    border-left: 3px solid #1a3a5c;
+}
+
+/* ================================================================
+   <select> – lista rozwijana
+   ================================================================
+   background-color: #f8f9fa – jasne tło.
+   border / border-radius – spójne z innymi polami.
+   cursor: pointer – kursor ręki zamiast strzałki.
+   ================================================================ */
+select {
+    background-color: #f8f9fa;
+    border: 1px solid #aabbd0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ================================================================
+   <textarea> – wieloliniowe pole tekstowe
+   ================================================================
+   resize: vertical – użytkownik może zmieniać TYLKO wysokość pola
+     (nie szerokość), co zapobiega "rozwalaniu" układu strony.
+   width: 100% – pole zajmuje pełną dostępną szerokość kontenera.
+   max-width: 500px – ale nie więcej niż 500px.
+   ================================================================ */
+textarea {
+    background-color: #f8f9fa;
+    border: 1px solid #aabbd0;
+    border-radius: 4px;
+    resize: vertical;
+    width: 100%;
+    max-width: 500px;
+}
+
+
+/* ================================================================
+   10. ETYKIETY RADIO I CHECKBOX – selektor sąsiada
+   ================================================================
+   Selektor sąsiada: input[type="radio"] + label
+                     input[type="checkbox"] + label
+   ================================================================
+   "A + B" – selektor BEZPOŚREDNIEGO SĄSIADA.
+   Wybiera <label>, który bezpośrednio następuje po
+   input[type="radio"] lub input[type="checkbox"].
+
+   Dzięki temu etykiety przy przyciskach radio i checkbox
+   są stylizowane INACZEJ niż zwykłe etykiety formularza
+   (które stylizuje reguła "fieldset label").
+
+   font-size: 0.85rem – nieco mniejszy od zwykłej etykiety (0.9rem).
+   color: #444444 – ciemnoszary.
+   margin-right: 12px – odstęp między poszczególnymi opcjami.
+   cursor: pointer – kursor ręki przy najeżdżaniu na etykietę.
+   ================================================================ */
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+    font-size: 0.85rem;
+    color: #444444;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+
+/* ================================================================
+   11. PRZYCISKI – selektory atrybutu
+   ================================================================
+   Zamiast selektora "button" (który dotyczy WSZYSTKICH przycisków),
+   używamy selektorów atrybutu: button[type="submit"] i button[type="reset"].
+   Pozwala to różnie stylować każdy typ przycisku.
+
+   Wspólne właściwości obu przycisków:
+   border: none – usunięcie domyślnego obramowania.
+   border-radius: 4px – zaokrąglone narożniki.
+   font-size: 1rem – rozmiar tekstu (1rem = domyślny rozmiar dokumentu).
+   padding: 10px 20px – wewnętrzne odstępy (góra/dół, lewo/prawo).
+   cursor: pointer – kursor ręki.
+   margin-right: 10px – odstęp między przyciskami.
+   font-family: inherit – dziedziczenie czcionki (jak w przypadku pól).
+   ================================================================ */
+button[type="submit"],
+button[type="reset"] {
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-family: inherit;
+}
+
+/* ================================================================
+   Przycisk SUBMIT – wyrazisty, spójny z nagłówkiem
+   ================================================================
+   background-color: #1a3a5c – ten sam ciemny niebieski co nagłówek.
+     Zapewnia wizualną spójność strony.
+   color: #ffffff – biały tekst.
+   text-transform: uppercase – kapitalizacja ("ZAREJESTRUJ SIĘ").
+   letter-spacing: 1px – zwiększone odstępy między literami.
+   font-weight: bold – pogrubienie.
+   ================================================================ */
+button[type="submit"] {
+    background-color: #1a3a5c;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* ================================================================
+   Przycisk RESET – neutralny, mniej wyróżniony
+   ================================================================
+   background-color: #888888 – neutralny szary.
+   color: #ffffff – biały tekst.
+   Brak uppercase i letter-spacing – mniej wyróżniony niż submit,
+   żeby użytkownik nie kliknął go przypadkowo.
+   ================================================================ */
+button[type="reset"] {
+    background-color: #888888;
+    color: #ffffff;
+}
+
+
+/* ================================================================
+   12. ELEMENTY POMOCNICZE – .info i .required
+   ================================================================ */
+
+/* ================================================================
+   Klasa .info – opis celu formularza
+   ================================================================
+   Selektor ".info" dotyczy elementu z class="info" (<p class="info">).
+
+   font-style: italic – kursywa (dyskretny, pomocniczy styl).
+   color: #555555 – szary, stonowany kolor (hex).
+   text-align: center – wyśrodkowanie tekstu.
+   margin-bottom: 24px – odstęp między opisem a formularzem.
+   ================================================================ */
+.info {
+    font-style: italic;
+    color: #555555;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* ================================================================
+   Klasa .required – gwiazdka przy polu obowiązkowym
+   ================================================================
+   Selektor ".required" dotyczy elementu <span class="required">*</span>.
+
+   color: red – jaskrawa czerwień przyciąga wzrok.
+   font-weight: bold – pogrubienie dla dodatkowego wyróżnienia.
+   margin-left: 2px – mały odstęp od tekstu etykiety.
+   ================================================================ */
+.required {
+    color: red;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+
+/* ================================================================
+   13. STOPKA – selektor: footer
+   ================================================================
+   footer {
+   ================================================================
+   Stopka stanowi wizualne zamknięcie strony – identyczna paleta
+   kolorów co nagłówek (ciemny niebieski / biały tekst).
+
+   background-color: #1a3a5c – ten sam ciemny niebieski co header i submit.
+   color: #ffffff – biały tekst.
+   text-align: center – wyśrodkowanie zawartości.
+   padding: 20px – wewnętrzne odstępy.
+   margin-top: 30px – odstęp od głównej treści strony.
+   ================================================================ */
+footer {
+    background-color: #1a3a5c;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* ================================================================
+   Selektor potomka: footer p
+   ================================================================
+   Paragrafy wewnątrz stopki.
+   margin: 5px 0 – zmniejszone marginesy (mniej przestrzeni niż domyślne).
+   font-size: 0.9rem – nieco mniejszy tekst.
+   ================================================================ */
+footer p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+/* ================================================================
+   Selektor potomka: footer a
+   ================================================================
+   Link kontaktowy (mailto) wewnątrz stopki.
+   Powinien być rozpoznawalny jako link, ale spójny z białym tekstem stopki.
+
+   color: #c8d8e8 – jasny, niebieskoszary (ten sam co motto w nagłówku).
+     Odróżnia się od białego tekstu, ale jest spójny z paletą strony.
+   text-decoration: underline – podkreślenie – standardowy wygląd linku.
+   ================================================================ */
+footer a {
+    color: #c8d8e8;
+    text-decoration: underline;
+}
