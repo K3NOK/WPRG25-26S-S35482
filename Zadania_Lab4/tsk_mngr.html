@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="tsk_mngr.css">
+</head>
+
+<body>
+
+    <!--header-->
+    <header class="top-header">
+        <h1>Task Manager</h1>
+    </header>
+
+    <!--sidebar-->
+    <aside class="sidebar">
+        <form>
+
+            <label for="taskName">gimme task name</label>
+            <input type="text" id="taskName" required>
+
+            <label for="taskCategory">gimme the category</label>
+            <select type="text" id="taskCategory" required>
+                <option value="praca">health</option>
+                <option value="dom">housework</option>
+                <option value="nauka">college</option>
+                <option value="zdrowie">car</option>
+                <option value="inne">family-stuff</option>
+            </select>
+
+            <label for="taskPriority">gimme priority</label>
+            <select id="taskPriority" required>
+                <option value="low">low</option>
+                <option value="mid">mid</option>
+                <option value="high">high</option>
+            </select>
+
+            <label for="taskDate">due date m8</label>
+            <input type="date" id="taskDate" required>
+
+            <label for="taskDesc">Description?</label>
+            <textarea id="taskDesc" rows="4"></textarea>
+
+            <label for="taskStatus">Status</label>
+            <select id="taskStatus" required>
+                <option value="pending">pending</option>
+                <option value="working on it">working on it</option>
+                <option value="done">done</option>
+            </select>
+
+            <button type="submit">Add Task</button>
+        </form>
+
+
+
+    </aside>
+
+    <!--main-->
+    <main class="main-shii">
+
+        <div class="stats-bar">
+            <span class="stat-box">All: 6</span>
+            <span class="stat-box">Pending: 3</span>
+            <span class="stat-box">Working: 2</span>
+            <span class="stat-box">Done: 1</span>
+        </div>
+
+        <div class="sorting-bar">
+            <span>Sort by:</span>
+            <button type="button" class="sort-btn active">Title &uarr;</button>
+            <button type="button" class="sort-btn">Priority</button>
+            <button type="button" class="sort-btn">Date</button>
+            <button type="button" class="sort-btn">Category</button>
+        </div>
+
+        <div class="task-list">
+            <!--numero uno-->
+            <div class="task-card bg-high">
+                <h3>Duct tape that leaking sink</h3>
+                <p><strong>Category:</strong> housework | <strong>Date:</strong>2026-03-30</p>
+                <p>Bro it's been 3 days, stop slackin.</p>
+                <span class="status-badge status-pending">pending</span>
+                <span class="priority-badge">High Priority</span>
+            </div>
+            <!--numero dos-->
+            <div class="task-card bg-medium">
+                <h3>Make sure ur house is still standing</h3>
+                <p><strong>Category:</strong> housework | <strong>Date:</strong> 2026-04-05</p>
+                <p>Annual checkup.</p>
+
+                <span class="status-badge status-working">working on it</span>
+                <span class="priority-badge">Medium Priority</span>
+            </div>
+            <!--numero tres-->
+            <div class="task-card bg-low">
+                <h3>Get that deer out of your windshield</h3>
+                <p><strong>Category:</strong> health | <strong>Date:</strong> 2026-04-05</p>
+                <p>it's lowkey starting to smell bad.</p>
+
+                <span class="status-badge status-done">done</span>
+                <span class="priority-badge">Low Priority</span>
+            </div>
+            <!--numero dos-uno-->
+            <div class="task-card bg-high">
+                <h3>Duct tape that leaking sink 2</h3>
+                <p><strong>Category:</strong> housework | <strong>Date:</strong>2026-03-30</p>
+                <p>Bro it's been 3 days, stop slackin.</p>
+                <span class="status-badge status-pending">pending</span>
+                <span class="priority-badge">High Priority</span>
+            </div>
+            <!--numero dos-dos-->
+            <div class="task-card bg-medium">
+                <h3>Make sure ur house is still standing 2</h3>
+                <p><strong>Category:</strong> housework | <strong>Date:</strong> 2026-04-05</p>
+                <p>Annual checkup.</p>
+
+                <span class="status-badge status-working">working on it</span>
+                <span class="priority-badge">Medium Priority</span>
+            </div>
+            <!--numero dos-tres-->
+            <div class="task-card bg-low">
+                <h3>Get that deer out of your windshield 2</h3>
+                <p><strong>Category:</strong> health | <strong>Date:</strong> 2026-04-05</p>
+                <p>it's lowkey starting to smell bad.</p>
+
+                <span class="status-badge status-done">done</span>
+                <span class="priority-badge">Low Priority</span>
+            </div>
+        </div>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

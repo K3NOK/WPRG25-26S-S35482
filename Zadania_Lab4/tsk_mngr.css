@@ -1,0 +1,151 @@
+/*reset deafault settow  browsera*/
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+
+    background-color: #4d3a3a;
+    color: white;
+
+    z-index: 10;
+    /*layer*/
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    width: 300px;
+    top: 60px;
+    /*zeby nie overlapowac headera*/
+    bottom: 0;
+
+    background-color: #dedede;
+    border-right: 1px solid #000000;
+
+    overflow-y: auto;
+}
+
+.sidebar form input,
+.sidebar form select,
+.sidebar form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 2px solid #626262;
+}
+
+.sidebar form button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 25px;
+    background-color: #3f2929;
+    color: white;
+    border: none;
+}
+
+
+.main-shii {
+    margin-top: 60px;
+    margin-left: 300px;
+    padding: 15px;
+}
+
+.stats-bar {
+    margin-bottom: 10px;
+}
+
+.stat-box {
+    display: inline-block;
+    /*place boxes nxt to eachother*/
+    padding: 10px 15px;
+    border: 2px solid #626262;
+    background-color: #dedede;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.sorting-bar {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000000;
+}
+
+.sort-btn {
+    display: inline-block;
+    padding: 7px 12px;
+    border: 1px solid #333;
+    background-color: white;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.sort-btn.active {
+    background-color: #3f2929;
+    color: white;
+    border-color: #333;
+}
+
+.task-card {
+    position: relative;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.priority-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-weight: bold;
+    color: #a5a5a5;
+    background-color: #333;
+}
+
+.bg-high {
+    background-color: #5b2f2fe4;
+}
+
+.bg-medium {
+    background-color: #5b2f2fa4;
+}
+
+.bg-low {
+    background-color: #5b2f2f65;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.status-pending {
+    background-color: #4d4d4d;
+}
+
+.status-working {
+    background-color: #6c460c;
+}
+
+.status-done {
+    background-color: #194534;
+}
+
+.task-card h3 {
+    margin-top: 0;
+}
+
+/*h3 ma default margin wiec go usuwamy zeby bbylo ladnieej*/
