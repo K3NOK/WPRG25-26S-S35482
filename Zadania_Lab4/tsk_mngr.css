@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+.jakies {
+    margin-bo: 10px;
+}
+
 .top-header {
     position: fixed;
     top: 0;
@@ -22,7 +26,7 @@ body {
 .sidebar {
     position: fixed;
     left: 0;
-    width: 300px;
+    width: 350px;
     top: 60px;
     /*zeby nie overlapowac headera*/
     bottom: 0;
@@ -55,7 +59,7 @@ body {
 
 .main-shii {
     margin-top: 60px;
-    margin-left: 300px;
+    margin-left: 350px;
     padding: 15px;
 }
 
@@ -67,7 +71,7 @@ body {
     display: inline-block;
     /*place boxes nxt to eachother*/
     padding: 10px 15px;
-    border: 2px solid #626262;
+    border: 2px dotted #626262;
     background-color: #dedede;
     margin-right: 5px;
     font-weight: bold;
@@ -104,7 +108,7 @@ body {
 
 .priority-badge {
     position: absolute;
-    top: 15px;
+    bottom: 15px;
     right: 15px;
     font-weight: bold;
     color: #a5a5a5;
