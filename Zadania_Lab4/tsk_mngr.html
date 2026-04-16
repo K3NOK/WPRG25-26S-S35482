@@ -10,45 +10,50 @@
     <!--header-->
     <header class="top-header">
         <h1 id="jakies">Task Manager</h1>
+        <nav class="top-nav">
+            <a href="#" class="nav-link active">Wszystkie</a>
+            <a href="#" class="nav-link">Do zrobienia</a>
+            <a href="#" class="nav-link">W trakcie</a>
+            <a href="#" class="nav-link">Zakończone</a>
+        </nav>
     </header>
 
     <!--sidebar-->
     <aside class="sidebar">
         <form>
-
-            <label for="taskName">gimme task name</label>
+            <label for="taskName">Tytuł zadania</label>
             <input type="text" id="taskName" required>
 
-            <label for="taskCategory">gimme the category</label>
-            <select type="text" id="taskCategory" required>
-                <option value="praca">health</option>
-                <option value="dom">housework</option>
-                <option value="nauka">college</option>
-                <option value="zdrowie">car</option>
-                <option value="inne">family-stuff</option>
+            <label for="taskCategory">Kategoria</label>
+            <select id="taskCategory" required>
+                <option value="praca">Praca</option>
+                <option value="dom">Dom</option>
+                <option value="nauka">Nauka</option>
+                <option value="zdrowie">Zdrowie</option>
+                <option value="inne">Inne</option>
             </select>
 
-            <label for="taskPriority">gimme priority</label>
+            <label for="taskPriority">Priorytet</label>
             <select id="taskPriority" required>
-                <option value="low">low</option>
-                <option value="mid">mid</option>
-                <option value="high">high</option>
+                <option value="low">Niski</option>
+                <option value="mid">Średni</option>
+                <option value="high">Wysoki</option>
             </select>
 
-            <label for="taskDate">due date m8</label>
+            <label for="taskDate">Data wykonania</label>
             <input type="date" id="taskDate" required>
 
-            <label for="taskDesc">Description?</label>
+            <label for="taskDesc">Opis (opcjonalne)</label>
             <textarea id="taskDesc" rows="4"></textarea>
 
             <label for="taskStatus">Status</label>
             <select id="taskStatus" required>
-                <option value="pending">pending</option>
-                <option value="working on it">working on it</option>
-                <option value="done">done</option>
+                <option value="pending">Do zrobienia</option>
+                <option value="working on it">W trakcie</option>
+                <option value="done">Zakończone</option>
             </select>
 
-            <button type="submit">Add Task</button>
+            <button type="submit">Dodaj zadanie</button>
         </form>
 
 
@@ -59,72 +64,148 @@
     <main class="main-shii">
 
         <div class="stats-bar">
-            <span class="stat-box">All: 6</span>
-            <span class="stat-box">Pending: 3</span>
-            <span class="stat-box">Working: 2</span>
-            <span class="stat-box">Done: 1</span>
+            <span class="stat-box">Wszystkie: 8</span>
+            <span class="stat-box">Do zrobienia: 3</span>
+            <span class="stat-box">W trakcie: 3</span>
+            <span class="stat-box">Zakończone: 2</span>
         </div>
 
         <div class="sorting-bar">
-            <span>Sort by:</span>
-            <button type="button" class="sort-btn active">Title &uarr;</button>
-            <button type="button" class="sort-btn">Priority</button>
-            <button type="button" class="sort-btn">Date</button>
-            <button type="button" class="sort-btn">Category</button>
+            <span>Sortuj:</span>
+            <button type="button" class="sort-btn active">Tytuł &uarr;</button>
+            <button type="button" class="sort-btn">Priorytet</button>
+            <button type="button" class="sort-btn">Data</button>
+            <button type="button" class="sort-btn">Kategoria</button>
+            <button type="button" class="sort-btn">Status</button>
         </div>
 
         <div class="task-list">
-            <!--numero uno-->
-            <div class="task-card bg-high">
-                <h3>Duct tape that leaking sink</h3>
-                <p><strong>Category:</strong> housework | <strong>Date:</strong>2026-03-30</p>
-                <p>Bro it's been 3 days, stop slackin.</p>
-                <span class="status-badge status-pending">pending</span>
-                <span class="priority-badge">High Priority</span>
+            <!--Karta 1-->
+            <div class="task-card bg-high span-2-cols">
+                <div class="card-header">
+                    <h3>XxxXXXXxxx xxXXXXx XXX (XxxX)</h3>
+                    <span class="priority-badge">Wysoki Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Dom</p>
+                    <p>Xx Xxxxxx xxx Xxxxx x xxxx xxXxX, x Xxxxx xxxxxx xx xxxxXxx.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-pending">Do zrobienia</span>
+                    <span class="date-badge">2026-04-18</span>
+                </div>
             </div>
-            <!--numero dos-->
-            <div class="task-card bg-medium">
-                <h3>Make sure ur house is still standing</h3>
-                <p><strong>Category:</strong> housework | <strong>Date:</strong> 2026-04-05</p>
-                <p>Annual checkup.</p>
 
-                <span class="status-badge status-working">working on it</span>
-                <span class="priority-badge">Medium Priority</span>
+            <!--Karta 2-->
+            <div class="task-card bg-medium span-2-rows">
+                <div class="card-header">
+                    <h3>XXxxxXx xxxxxxxxxxx XxxxXxxx</h3>
+                    <span class="priority-badge">Średni Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Dom</p>
+                    <p>XxxxxXX xxxxxX, xxxxxxxxxxx xxxxx, xXxxxxx, xxxxxxxxxxx xxxx xXxxxxxxx Xxxxxxxxxxxx. xxxxxxxxx xxxxx Xxxxxxxxxxx Xxxxxxxx xXXXXXX. xxxxXxx xx XXXX Xxxxx xxxx XxxxxxXX o xXxxx xxxxxxx x Xxxxx XXXxxX. Xxxx xxX Xxxxx xXX Xxxxxx.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-working">W trakcie</span>
+                    <span class="date-badge">2026-04-25</span>
+                </div>
             </div>
-            <!--numero tres-->
+
+            <!--Karta 3-->
             <div class="task-card bg-low">
-                <h3>Get that deer out of your windshield</h3>
-                <p><strong>Category:</strong> health | <strong>Date:</strong> 2026-04-05</p>
-                <p>it's lowkey starting to smell bad.</p>
-
-                <span class="status-badge status-done">done</span>
-                <span class="priority-badge">Low Priority</span>
+                <div class="card-header">
+                    <h3>Xxxx XxXXxxXx</h3>
+                    <span class="priority-badge">Niski Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Zdrowie / Inne</p>
+                    <p>XxxXx XxxxxXx xx xxXxXXx.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-done">Zakończone</span>
+                    <span class="date-badge">2026-04-20</span>
+                </div>
             </div>
-            <!--numero dos-uno-->
+            
+            <!--Karta 4-->
             <div class="task-card bg-high">
-                <h3>Duct tape that leaking sink 2</h3>
-                <p><strong>Category:</strong> housework | <strong>Date:</strong>2026-03-30</p>
-                <p>Bro it's been 3 days, stop slackin.</p>
-                <span class="status-badge status-pending">pending</span>
-                <span class="priority-badge">High Priority</span>
+                <div class="card-header">
+                    <h3>XxxXxxx XXXXX - XxxXxxX</h3>
+                    <span class="priority-badge">Wysoki Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Nauka</p>
+                    <p>XxxxXxxx xXxxxxXx xXXx xXxXXxx xXxxXxX xXxxxxxxxxx xXxxxxx XXX.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-working">W trakcie</span>
+                    <span class="date-badge">2026-04-17</span>
+                </div>
             </div>
-            <!--numero dos-dos-->
+            
+            <!--Karta 5-->
             <div class="task-card bg-medium">
-                <h3>Make sure ur house is still standing 2</h3>
-                <p><strong>Category:</strong> housework | <strong>Date:</strong> 2026-04-05</p>
-                <p>Annual checkup.</p>
-
-                <span class="status-badge status-working">working on it</span>
-                <span class="priority-badge">Medium Priority</span>
+                <div class="card-header">
+                    <h3>XxXxX xXxxXxxX</h3>
+                    <span class="priority-badge">Średni Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Dom</p>
+                    <p>XxXX, xXxxXXxx, xxx i xXxxxXxXX.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-pending">Do zrobienia</span>
+                    <span class="date-badge">2026-04-22</span>
+                </div>
             </div>
-            <!--numero dos-tres-->
-            <div class="task-card bg-low">
-                <h3>Get that deer out of your windshield 2</h3>
-                <p><strong>Category:</strong> health | <strong>Date:</strong> 2026-04-05</p>
-                <p>it's lowkey starting to smell bad.</p>
 
-                <span class="status-badge status-done">done</span>
-                <span class="priority-badge">Low Priority</span>
+            <!--Karta 6-->
+            <div class="task-card bg-low">
+                <div class="card-header">
+                    <h3>Xxx XxXxx XXxX</h3>
+                    <span class="priority-badge">Niski Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Praca</p>
+                    <p>XxXxxXX, xXx - xXXxxXxxX.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-done">Zakończone</span>
+                    <span class="date-badge">2026-04-15</span>
+                </div>
+            </div>
+
+            <!--Karta 7-->
+            <div class="task-card bg-high">
+                <div class="card-header">
+                    <h3>XxXxxX x XXxxXxx</h3>
+                    <span class="priority-badge">Wysoki Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Zdrowie</p>
+                    <p>XxxxxxX xXxxXxxXx XXxXx, xxx Xxx Xxxxxxxx xXxXx xxXxxxxXX.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-pending">Do zrobienia</span>
+                    <span class="date-badge">2026-04-19</span>
+                </div>
+            </div>
+
+            <!--Karta 8-->
+            <div class="task-card bg-medium">
+                <div class="card-header">
+                    <h3>XxXXXxxXxxX xxx XXxxXXx</h3>
+                    <span class="priority-badge">Średni Priorytet</span>
+                </div>
+                <div class="card-desc">
+                    <p><strong>Kategoria:</strong> Praca</p>
+                    <p>XxXxxX xx XXxxXxxX xxXxxxxX xXxxx.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="status-badge status-working">W trakcie</span>
+                    <span class="date-badge">2026-04-21</span>
+                </div>
             </div>
         </div>
 
