@@ -1,53 +1,37 @@
-/*reset deafault settow  browsera*/
-
 body {
     margin: 0;
     padding: 0;
 
-    /* Dodajemy CSS Grid dla całego ciała strony! */
     display: grid;
     min-height: 100vh;
 
-    /* Definiujemy wymiary: lewa kolumna (sidebar) 280px, prawa kolumna cała reszta wolnego miejsca (1fr) */
     grid-template-columns: 280px 1fr;
-    /* Definiujemy wiersze: nagłówek 60px, reszta ekranu (1fr) */
+
     grid-template-rows: 60px 1fr;
 
-    /* Nazywamy obszary, żeby łatwo było przypisać do nich elementy */
     grid-template-areas:
         "header header"
         "sidebar main";
 }
 
 .top-header {
-    /* Przypisujemy nagłówek do konkretnego obszaru w Gridzie */
     grid-area: header;
 
-    /* Poniżej włączamy Flexbox, by rozdzielić lewą (tytuł) i prawą stronę (tag <nav>) */
     display: flex;
     justify-content: space-between;
-    /* jedno dociśnięte do lewej, drugie do prawej */
     align-items: center;
-    /* wyśrodkowanie w pionie w nagłówku */
     padding: 0 20px;
-    /* Odsunięcie od krawędzi okna by tekst nie leżał na lewej ścianie */
     box-sizing: border-box;
-    /* padding nie rozpycha diva na boki */
-
-    /* Używamy dozwolonego sticky, by nagłówek przylegał przy przewijaniu */
     position: sticky;
     top: 0;
     z-index: 10;
-
     background-color: #4d3a3a;
     color: white;
 }
 
-/* --- Sekcja nowej Nawigacji w Nagłówku --- */
 .top-nav {
     display: flex;
     gap: 15px;
-    /* Szybki, ustandaryzowany odstęp między przyciskami (żadnych marginesów!) */
 }
 
 .nav-link {
@@ -58,53 +42,42 @@ body {
     border-radius: 5px;
 }
 
-/* Subtelny dodatek żeby lepiej to wyglądało */
 .nav-link:hover {
     background-color: #6c5454;
 }
 
-/* Wizualne wyróżnienie "aktywnego" pola */
 .nav-link.active {
     background-color: #dedede;
     color: #4d3a3a;
 }
 
-/* ----------------------------------------- */
+
 
 .sidebar {
-    /* Przypisujemy do obszaru sidebar */
     grid-area: sidebar;
 
     background-color: #dedede;
     border-right: 1px solid #000000;
 
-    /* Sticky trzyma go w miejscu: odpoczywa niżej o 60px pod headrem */
     position: sticky;
     top: 60px;
     height: calc(100vh - 60px);
     overflow-y: auto;
 }
 
-/* --- Sekcja Formularza (Etap 3 Flexbox) --- */
 .sidebar form {
-    /* Uruchamiamy kontener Flex dla formularza */
     display: flex;
-    /* Ta komenda to game-changer: układa wszystkie elementy pionowo, jak w kolumnie */
     flex-direction: column;
 
     padding: 5px;
     gap: 5px;
-    /* Odstęp między kontrolkami */
 }
 
 .sidebar form label {
     font-weight: bold;
     margin-top: 10px;
-    /* Dajemy lekki odstęp w górę, żeby etykieta "odkleiła" się od poprzedniego inputa */
 }
 
-/* Uwaga: zniknęło "width: 100%;". 
-Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szerokość rodzica :) */
 .sidebar form input,
 .sidebar form select,
 .sidebar form textarea,
@@ -125,47 +98,33 @@ Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szeroko
     cursor: pointer;
 }
 
-/* ------------------------------------- */
-
 
 .main-shii {
-    /* Przypisujemy lewe obszary do obszaru main */
     grid-area: main;
     padding: 15px;
 }
 
-/* --- Sekcja Paska Statystyk (Etap 4) --- */
 .stats-bar {
     display: flex;
-    /* używamy flexboxa do wrzucania ich w rząd */
     gap: 15px;
-    /* wyręczamy się od margin-right */
     margin-bottom: 20px;
 }
 
 .stat-box {
     flex: 1;
-    /* MAGICZNE SŁOWO! Zajmij równą wartość pozostałego miejsca na ekranie z innymi sasiadami z 'flex: 1' */
+    /*rowny split pozost mijsca*/
     text-align: center;
-    /* trochę elegancji */
     padding: 10px 15px;
     border: 2px dotted #626262;
     background-color: #dedede;
     font-weight: bold;
 }
 
-/* ------------------------------------- */
-
-/* --- Sekcja Paska Sortowania (Etap 4) --- */
 .sorting-bar {
     display: flex;
-    /* po raz kolejny, tworzymy rząd przycisków za pomoca flex'a */
     gap: 10px;
     align-items: center;
-    /* wyrównujemy tekst z przyciskami do wspólnej osi w pionie żeby jedne nie latały wyżej i niżej */
     flex-wrap: wrap;
-    /* ZŁOTA ZASADA RESPONSYWNOŚCI - jeśli ekran jest za ciasny (na telefonie) przenieś przyciski, które się nie mieszczą, rząd niżej!*/
-
     margin-bottom: 30px;
     padding-bottom: 15px;
     border-bottom: 2px solid #000000;
@@ -184,53 +143,37 @@ Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szeroko
     border-color: #333;
 }
 
-/* ------------------------------------- */
 
-/* --- Sekcja Siatki Zadań (Etap 5 Auto-fit Grid) --- */
 .task-list {
-    /* Aktywujemy nasz potężny algorytm szachownicy dla zestawu zadań! */
     display: grid;
-    /* Równy odstęp 20 pikseli między kartami na boki i w dół (zastępuje nam margin-bottom). */
     gap: 20px;
 
-    /* SERCE RESPONSYWNOŚCI: 
-       auto-fit: wrzucaj tyle kolumn, ile wejdzie szerokości, puste wyrzuć.
-       minmax: Minimalna dozwolona szerokość karty to 280px (przy której spadnie w dół). 
-               Gdy miejsca jest dość karty mogą puchnąć sprawiedliwie zajmując 1 ułamek 'fr' (są równe). */
+    /* jak jest miejsce to wbij*/
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-/* Ustawiamy konkretnej karcie polecenie użycia przestrzeni dwóch sąsiadujących kolumn jeśli jest miejsce */
 .span-2-cols {
     grid-column: span 2;
 }
 
-/* A innej, by była tak wysoka, że nałapie 2 rzędy jakby była dwiema kartami pionowo */
 .span-2-rows {
     grid-row: span 2;
 }
 
-/* -------------------------------------------------- */
-
-/* --- Sekcja Wewnętrznego Layoutu Karty (Etap 6 - Ostatni Szlif!) --- */
 .task-card {
-    /* Karty stają się podatnymi, odrębnymi kontenerami Flex do aranżowania środka z góry na dół! */
     display: flex;
     flex-direction: column;
 
     border: 1px solid #333;
     border-radius: 20px;
     padding: 15px;
-    /* Usunąłem 'position: relative' i 'margin-bottom' – nie są już tu wcale potrzebne */
 }
 
-/* --- NAGŁÓWEK KARTY --- */
+
 .card-header {
     display: flex;
     justify-content: space-between;
-    /* Tytuł ciśnie w lewo, badge ciśnie w prawo, po równo */
     align-items: flex-start;
-    /* pilnuje by znaczek "Priorytety" nie skakał w dół jeśli Tytuł ma np. 2 linijki */
     gap: 15px;
 }
 
@@ -239,10 +182,8 @@ Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szeroko
 }
 
 .priority-badge {
-    /* Skasowano 'position: absolute' - etykieta żyje teraz we Flexie swoim życiem */
     font-weight: bold;
     color: #444;
-    /* ciemnoszary na nowy pastelowy design */
     background-color: #fff;
     border: 1px solid #666;
 
@@ -250,13 +191,10 @@ Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szeroko
     border-radius: 10px;
     font-size: 11px;
 
-    /* GŁÓWNA MAGIA Z ZADANIA: "nie zmniejsza się gdy tytuł jest długi". Komenda ta zakazuje skurczania się elementu przez inne! */
     flex-shrink: 0;
 }
 
-/* --- ŚRODEK KARTY --- */
 .card-desc {
-    /* "Ugryź" i pochłoń całe rezerwowe wolne miejsce w ciele karty (miedzy uciekniemy od daty). Stopka dzięki temu leci na sam styk z dnem! */
     flex-grow: 1;
     margin: 15px 0;
 }
@@ -265,32 +203,25 @@ Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szeroko
     margin: 5px 0;
 }
 
-/* --- STOPKA KARTY --- */
+
 .card-footer {
     display: flex;
     justify-content: space-between;
-    /* Status na lewo, Data z prawej */
     align-items: center;
-    /* Trzymamy je na stałej wspólnej osi horyzontalnej */
 }
 
-/* Wybrane odcienie szarości zmieszanej z chłodnym brązem nawiązujące do Twojego menu. */
 .bg-high {
     background-color: #c4b7b5fa;
-    /* wyraźniejszy brązowo-szary -> wysoki */
 }
 
 .bg-medium {
     background-color: #dcd4d2db;
-    /* średni pastelowy szary z nutą beżu -> średni */
 }
 
 .bg-low {
     background-color: #f2efef;
-    /* bardzo jasny, neutralny szary -> niski */
 }
 
-/* Ostatnie retusze etykiet dolnych... */
 .status-badge {
     padding: 6px 12px;
     border-radius: 15px;
@@ -316,5 +247,3 @@ Flexbox w trybie 'column' sam z siebie rozciąga elementy na maksymalną szeroko
     font-weight: bold;
     color: #4a4a4a;
 }
-
-/* -------------------------------------------------------------------------- */
