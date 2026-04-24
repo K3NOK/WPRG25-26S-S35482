@@ -159,11 +159,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>Tagi zadania</label>
             <div style="display:flex; flex-direction: column; gap: 5px; margin-bottom: 10px;">
                 <label style="margin-top:0"><input type="checkbox" name="tags[]" value="pilne" <?= in_array('pilne', $inTags) ? 'checked' : '' ?>> pilne</label>
-                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="nie pilne" <?= in_array('zespół', $inTags) ? 'checked' : '' ?>> zespół</label>
-                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="trzy" <?= in_array('backend', $inTags) ? 'checked' : '' ?>> backend</label>
-                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="nie trzy" <?= in_array('frontend', $inTags) ? 'checked' : '' ?>> frontend</label>
+                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="nie pilne" <?= in_array('nie pilne', $inTags) ? 'checked' : '' ?>> nie pilne</label>
+                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="trzy" <?= in_array('trzy', $inTags) ? 'checked' : '' ?>> trzy</label>
+                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="nie trzy" <?= in_array('nie trzy', $inTags) ? 'checked' : '' ?>> nie trzy</label>
                 <label style="margin-top:0"><input type="checkbox" name="tags[]" value="dom" <?= in_array('dom', $inTags) ? 'checked' : '' ?>> dom</label>
-                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="nie dom" <?= in_array('zakupy', $inTags) ? 'checked' : '' ?>> zakupy</label>
+                <label style="margin-top:0"><input type="checkbox" name="tags[]" value="nie dom" <?= in_array('nie dom', $inTags) ? 'checked' : '' ?>> nie dom</label>
             </div>
 
             <button type="submit">Dodaj zadanie</button>
