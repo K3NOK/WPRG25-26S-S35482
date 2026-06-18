@@ -238,7 +238,7 @@ table {
     border-collapse: collapse;
     text-align: left;
 }
-
+/*table header*/
 th {
     padding: 1rem;
     font-weight: 600;
